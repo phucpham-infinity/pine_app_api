@@ -1,19 +1,54 @@
 import express from "express";
+import cors from "cors";
+import helmet from "helmet";
+import morgan from "morgan";
 
-const port = process.env.PORT || 3000;
-const app = express();
+import { env } from "@/helpers";
+import { mongooseConnect } from "@/config";
+import { UserRouter, PingRouter } from "@/router/api";
 
-app.get("/hello-world", (request, response) => {
-  response.send("Hello World!");
-});
+const PORT: number = +env("PORT");
+const DB_URL = env("DB_URL");
 
-app.get("/api", (request, response) => {
-  response.json({ status: "ok" });
-});
+if (!PORT || !DB_URL) {
+  console.error("Missing env!");
+  process.exit(1);
+}
 
-app.listen(port, () => {
-  console.log(`[server]: Server is running at http://localhost:${port}`);
-});
+export const app = express();
 
-// Export the Express API
-module.exports = app;
+app.use(morgan("combined"));
+
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+    frameguard: false,
+    crossOriginEmbedderPolicy: false,
+    crossOriginOpenerPolicy: false,
+    crossOriginResourcePolicy: false,
+  })
+);
+app.use(
+  cors({
+    origin: "*",
+  })
+);
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+app.use("/api", [PingRouter, UserRouter]);
+
+app
+  .listen(PORT, () => {
+    console.log(`Server started on port ${PORT}: http://localhost:${PORT}`);
+    mongooseConnect({ db: DB_URL });
+  })
+  .on("error", (err) => {
+    console.log("ERROR: ", err);
+  });
+
+declare module "express" {
+  export interface Request {
+    user?: any;
+  }
+}
