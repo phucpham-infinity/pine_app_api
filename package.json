@@ -1,12 +1,14 @@
 {
   "name": "vercel-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "pina_app_api",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "dev": "rollup -c --bundleConfigAsCjs -w",
-    "build": "NODE_ENV=production & rollup -c --bundleConfigAsCjs"
+    "build": "NODE_ENV=production & rollup -c --bundleConfigAsCjs",
+    "kill": "npx kill-port 3000",
+    "deploy": ""
   },
   "keywords": [],
   "author": "",
