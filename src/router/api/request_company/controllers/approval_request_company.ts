@@ -6,6 +6,8 @@ export const approvalRequestCompany = async (req: Request, res: Response) => {
   const { companyName, companyEmail, licenseNo, registerNo, userEmail } =
     req.body as Partial<IRequestCompany>;
 
+  // TODO: Create profile with commany
+
   const newRequest = new RequestCompanySchema({
     companyName,
     companyEmail,

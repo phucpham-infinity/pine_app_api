@@ -14,6 +14,8 @@ import {
   RequestCompanyRouter,
 } from "@/router/api";
 
+import { RootRender } from "@/router/public";
+
 const PORT: number = +env("PORT");
 const DB_URL = env("DB_URL");
 
@@ -42,6 +44,7 @@ app.use(
 );
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(express.static("public"));
 
 app.use("/api", [
   PingRouter,
@@ -51,6 +54,8 @@ app.use("/api", [
   AnalyticsRouter,
   RequestCompanyRouter,
 ]);
+
+app.get("*", RootRender);
 
 app
   .listen(PORT, () => {
