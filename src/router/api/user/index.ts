@@ -1,22 +1,31 @@
-import express from "express";
+import express, { Router } from "express";
+
+import { validate, verifyToken } from "@/middleware";
+import { registerDto, loginDto, updateByPhoneDto } from "./dto";
+
 import { register } from "./controllers/register";
-import { loginWithEmailPassword } from "./controllers/loginWithEmailPassword";
-import { validate } from "@/middleware";
-import { z } from "zod";
+import { loginWithPhone } from "./controllers/loginWithPhone";
+import { me } from "./controllers/me";
+import { updateByPhone } from "./controllers/updateByPhone";
+
+const ROUTER = {
+  register: "/user/register",
+  loginWithPhone: "/user/login-with-phone",
+  me: "/user/me",
+  updateByPhone: "/user/update-by-phone",
+};
 
 export const UserRouter = express.Router();
 
-const registerValidate = z.object({
-  body: z.object({
-    email: z.string().email(),
-    password: z.string().min(5),
-  }),
-});
-
-UserRouter.use(validate(registerValidate))
-  .route("/user/register")
+UserRouter.use(ROUTER.register, validate(registerDto))
+  .route(ROUTER.register)
   .post(register);
 
-UserRouter.use(validate(registerValidate))
-  .route("/user/login-with-email-password")
-  .post(loginWithEmailPassword);
+UserRouter.use(ROUTER.loginWithPhone, validate(loginDto))
+  .route(ROUTER.loginWithPhone)
+  .post(loginWithPhone);
+
+UserRouter.use(ROUTER.me, verifyToken).route(ROUTER.me).get(me);
+UserRouter.use(ROUTER.updateByPhone, validate(updateByPhoneDto))
+  .route(ROUTER.updateByPhone)
+  .post(updateByPhone);

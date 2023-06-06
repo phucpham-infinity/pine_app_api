@@ -5,7 +5,13 @@ import morgan from "morgan";
 
 import { env } from "@/helpers";
 import { mongooseConnect } from "@/config";
-import { UserRouter, PingRouter } from "@/router/api";
+import {
+  UserRouter,
+  PingRouter,
+  CompanyRouter,
+  ProfileRouter,
+  AnalyticsRouter,
+} from "@/router/api";
 
 const PORT: number = +env("PORT");
 const DB_URL = env("DB_URL");
@@ -36,7 +42,13 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use("/api", [PingRouter, UserRouter]);
+app.use("/api", [
+  PingRouter,
+  UserRouter,
+  CompanyRouter,
+  ProfileRouter,
+  AnalyticsRouter,
+]);
 
 app
   .listen(PORT, () => {

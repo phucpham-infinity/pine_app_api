@@ -1,12 +1,10 @@
 import { Request, Response } from "express";
 import UserSchema from "@/models/user";
 
-export const loginWithEmailPassword = async (req: Request, res: Response) => {
-  const body = req.body;
-  const password = body?.password || "";
-  const email = body?.email || "";
+export const loginWithPhone = async (req: Request, res: Response) => {
+  const { password, phone } = req?.body || {};
   try {
-    const user = await UserSchema.findOne({ email });
+    const user = await UserSchema.findOne({ phone });
 
     if (!user)
       return res.status(400).json({ status: 400, error: "User not found!" });

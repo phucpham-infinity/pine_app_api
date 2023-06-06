@@ -3,26 +3,28 @@ import bcrypt from "bcryptjs";
 import { omit } from "lodash";
 import jwt from "jsonwebtoken";
 
-interface IUser {
-  email: string;
-  username: string;
+import { IBaseModal, createSchema } from "@/helpers";
+
+export interface IUser extends IBaseModal {
+  email?: string;
+  username?: string;
   password: string;
-  createdAt: Date;
-  updatedAt: Date;
+  phone: string;
+  isUseFaceId?: boolean;
+  isUseTouchId?: boolean;
   comparePassword: (
     candidatePassword: string,
     cb: (err: any, isMatch: boolean) => any
   ) => any;
   generateToken: () => string;
-  doc: () => Partial<IUser>;
 }
 
-const UserSchema: Schema = new Schema({
-  email: { type: String, required: true, unique: true },
-  username: { type: String, required: true },
+const UserSchema = createSchema({
+  phone: { type: String, required: true, unique: true },
+  isUseFaceId: { type: Boolean, required: false },
+  isUseTouchId: { type: Boolean, required: false },
   password: { type: String, required: true },
-  createdAt: { type: Date, default: new Date() },
-  updatedAt: { type: Date, default: new Date() },
+  profile: { type: mongoose.Types.ObjectId, ref: "Profile" },
 });
 
 UserSchema.method("doc", function () {

@@ -7,7 +7,7 @@ type TInput = {
 export const mongooseConnect = ({ db }: TInput) => {
   const connect = () => {
     mongoose
-      .connect(db)
+      .connect(db, { dbName: "pina_app" })
       .then((res) => {
         return console.info(`Successfully connected to ${res.connection.name}`);
       })
