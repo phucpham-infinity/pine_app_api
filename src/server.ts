@@ -15,6 +15,7 @@ import {
 } from "@/router/api";
 
 import { RootRender } from "@/router/public";
+import path from "path";
 
 const PORT: number = +env("PORT");
 const DB_URL = env("DB_URL");
@@ -44,7 +45,7 @@ app.use(
 );
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname + "/public")));
 
 app.use("/api", [
   PingRouter,
