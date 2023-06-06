@@ -11,6 +11,7 @@ import {
   CompanyRouter,
   ProfileRouter,
   AnalyticsRouter,
+  RequestCompanyRouter,
 } from "@/router/api";
 
 const PORT: number = +env("PORT");
@@ -48,6 +49,7 @@ app.use("/api", [
   CompanyRouter,
   ProfileRouter,
   AnalyticsRouter,
+  RequestCompanyRouter,
 ]);
 
 app
