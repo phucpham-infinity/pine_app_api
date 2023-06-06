@@ -33,7 +33,7 @@ AnalyticsRouter.route("/analytics/income-expense").get((_, res) => {
       ],
       expenses: [
         { category: "Salaries", amount: 5000 },
-        { category: "Rent", amount: 2000 },
+        { category: "Rent", amount: 3000 },
         { category: "Utilities", amount: 1000 },
       ],
     },
