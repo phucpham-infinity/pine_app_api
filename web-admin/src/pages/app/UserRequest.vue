@@ -3,6 +3,9 @@
         <q-table :loading="store.isLoading" title="User Request" :rows="store.data" :columns="columns" row-key="name">
             <template v-slot:body="props">
                 <q-tr :props="props">
+                    <q-td key="userEmail" :props="props">
+                        {{ props.row.userEmail }}
+                    </q-td>
                     <q-td key="companyName" :props="props">
                         {{ props.row.companyName }}
                     </q-td>
@@ -24,8 +27,8 @@
                         </q-badge>
                     </q-td>
                     <q-td key="actions" :props="props">
-                        <q-btn @click="handleApproval(props.row._id)" v-if="props.row.status === 'PENDING'" color="primary"
-                            label="APPROVAL" />
+                        <q-btn @click="handleApproval(props.row.userEmail)" v-if="props.row.status === 'PENDING'"
+                            color="primary" label="APPROVAL" />
                     </q-td>
                 </q-tr>
             </template>
@@ -39,8 +42,8 @@ import { useUserRequestStore } from '../../stores/user-request';
 
 const store = useUserRequestStore();
 
-const handleApproval = (id: string) => {
-    store.approvalRequest(id)
+const handleApproval = (email: string) => {
+    store.approvalRequest(email)
 }
 
 onMounted(() => {
@@ -48,6 +51,7 @@ onMounted(() => {
 })
 
 const columns = [
+    { name: 'userEmail', label: 'User Email', field: 'userEmail' },
     { name: 'companyName', label: 'Company Name', field: 'companyName' },
     { name: 'companyEmail', label: 'Company Email', field: 'companyEmail' },
     { name: 'licenseNo', label: 'License No', field: 'licenseNo' },
@@ -55,8 +59,6 @@ const columns = [
     { name: 'status', label: 'Status', field: 'status' },
     { name: 'actions', label: 'Actions', field: 'actions' },
 ]
-
-
 
 </script>
 

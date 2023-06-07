@@ -2,7 +2,8 @@ import { Request, Response } from "express";
 import RequestCompanySchema from "@/models/request_company";
 
 export const approvalRequestCompany = async (req: Request, res: Response) => {
-  const { email } = req.params || {};
+  const { email } = req.query || {};
+  console.log("email", email);
 
   try {
     const data = await RequestCompanySchema.findOneAndUpdate(

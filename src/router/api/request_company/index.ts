@@ -7,7 +7,7 @@ import { approvalRequestCompany } from "./controllers/approval_request_company";
 import { getAllRequestCompany } from "./controllers/get_all_request_company";
 const ROUTER = {
   create: "/request-company",
-  approval: "/request-company/approval/:email",
+  approval: "/request-company/approval",
   getAll: "/request-company",
 };
 
@@ -19,7 +19,7 @@ RequestCompanyRouter.route(ROUTER.create).post([
   createRequestCompany,
 ]);
 
-RequestCompanyRouter.route(ROUTER.approval).post([
+RequestCompanyRouter.route(ROUTER.approval).put([
   verifyToken,
   approvalRequestCompany,
 ]);
