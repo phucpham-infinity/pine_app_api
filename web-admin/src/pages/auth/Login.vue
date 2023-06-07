@@ -20,7 +20,7 @@ const handleLogin = () => {
             <q-page class="bg-light-green window-height window-width row justify-center items-center">
                 <div class="column">
                     <div style="width: 30vw;" class="row">
-                        <h5 class="text-h5 text-white q-my-md">Company & Co {{ store.token }}</h5>
+                        <h5 class="text-h5 text-white q-my-md">PINA WEB ADMIN</h5>
                     </div>
                     <div style="width: 30vw;" class="row">
                         <q-card square bordered class="q-pa-lg full-width shadow-1">

@@ -9,3 +9,13 @@ export const createRequetCompanyDto = z.object({
     userEmail: z.string(),
   }),
 });
+
+export const updateRequetCompanyDto = z.object({
+  body: z.object({
+    companyName: z.string().optional(),
+    licenseNo: z.string().optional(),
+    registerNo: z.string().optional(),
+    companyEmail: z.string().optional(),
+    userEmail: z.string().optional(),
+  }),
+});

@@ -16,7 +16,7 @@ const RequestCompanySchema = createSchema({
   licenseNo: { type: String, required: true },
   registerNo: { type: String, required: true },
   companyEmail: { type: String, required: true },
-  userEmail: { type: String, required: true },
+  userEmail: { type: String, required: true, unique: true },
   status: {
     type: String,
     enum: ["PENDING", "APPROVAL", "REJECT"],
