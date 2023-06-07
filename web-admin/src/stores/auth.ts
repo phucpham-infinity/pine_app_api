@@ -1,35 +1,41 @@
 import { defineStore } from "pinia";
 import { LOCAL_TOKEN_KEY } from "../config";
-import { service } from "../lib/axios";
+import { useService } from "../lib/axios";
 
 export const useAuthStore = defineStore("auth", {
   state: () => ({
-    user: null as any,
-    token: localStorage.getItem("pina_app_token"),
-    isLoading: false,
-    returnUrl: "",
+    _user: null as any,
+    _token: localStorage.getItem("pina_app_token"),
+    _isLoading: false,
+    _returnUrl: "",
   }),
   getters: {
-    user: (state) => state.user,
-    token: (state) => state.token,
-    returnUrl: (s) => s.returnUrl,
+    user: (state) => state._user,
+    token: (state) => state._token,
+    returnUrl: (s) => s._returnUrl,
+    isLoading: (s) => s._isLoading,
   },
   actions: {
     getLocalToken() {
       const token = localStorage.getItem(LOCAL_TOKEN_KEY);
-      if (token) this.token = token;
+      if (token) this._token = token;
+    },
+    async getMe() {
+      this._isLoading = true;
+      const res = await useService().get("/user/me");
+      this._user = res?.data;
+      this._isLoading = false;
     },
     async login(phone: string, password: string) {
-      this.isLoading = true;
-      const data = await service({ requiresAuth: false }).post(
-        "/user/login-with-phone",
-        {
-          password,
-          phone,
-        }
-      );
-      this.isLoading = false;
-      this.user = data;
+      this._isLoading = true;
+      const res = await useService().post("/user/login-with-phone", {
+        password,
+        phone,
+      });
+      this._isLoading = false;
+      this._token = res?.data?.token;
+      localStorage.setItem(LOCAL_TOKEN_KEY, res?.data?.token);
+      location.reload();
     },
   },
 });

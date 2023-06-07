@@ -7,7 +7,6 @@ const password = ref('')
 
 const store = useAuthStore();
 
-
 const handleLogin = () => {
     if (!phone.value || !password.value) return
     store.login(phone.value, password.value)
@@ -32,8 +31,8 @@ const handleLogin = () => {
                                 </q-form>
                             </q-card-section>
                             <q-card-actions class="q-px-md">
-                                <q-btn @click="handleLogin" unelevated color="light-green-7" size="lg" class="full-width"
-                                    label="Login" />
+                                <q-btn @click="handleLogin" :loading="store.isLoading" unelevated color="light-green-7"
+                                    size="lg" class="full-width" label="Login" />
                             </q-card-actions>
                             <q-card-section class="text-center q-pa-none">
                                 <p class="text-grey-6">Not reigistered? Created an Account</p>
