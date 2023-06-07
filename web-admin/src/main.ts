@@ -1,5 +1,4 @@
 import { createApp } from "vue";
-import "./style.css";
 import App from "./App.vue";
 
 import { Quasar } from "quasar";
@@ -17,9 +16,9 @@ import store from "./lib/store";
 import router from "./lib/router";
 
 createApp(App)
-  .use(router)
   .use(store)
   .use(Quasar, {
     plugins: {}, // import Quasar plugins and add here
   })
+  .use(router)
   .mount("#app");
