@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useAuthStore } from '../../stores/auth';
 import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
@@ -14,9 +14,6 @@ onMounted(() => {
     store.getMe()
 })
 
-watch(user, (_user) => {
-    console.log('_user', _user);
-})
 
 const handleToMenu = (menu: number) => {
     switch (menu) {
@@ -72,7 +69,7 @@ const handleToMenu = (menu: number) => {
         </q-drawer>
 
         <q-page-container>
-            <div class="p-5">
+            <div class="p-8">
                 <router-view />
             </div>
         </q-page-container>

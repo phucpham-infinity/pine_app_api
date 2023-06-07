@@ -3,7 +3,7 @@ import { useService } from "../lib/axios";
 
 export const useUserRequestStore = defineStore("userRequest", {
   state: () => ({
-    _data: null as any,
+    _data: [] as any,
     _isLoading: false,
   }),
   getters: {
@@ -13,9 +13,14 @@ export const useUserRequestStore = defineStore("userRequest", {
   actions: {
     async getUserRequest() {
       this._isLoading = true;
-      const res = await useService().get("/user/me");
+      const res = await useService().get("/request-company");
       this._data = res?.data;
       this._isLoading = false;
+    },
+    async approvalRequest(id: string) {
+      this._isLoading = true;
+      await useService().post("/request-company/approval/" + id);
+      this.getUserRequest();
     },
   },
 });

@@ -7,7 +7,7 @@ import { approvalRequestCompany } from "./controllers/approval_request_company";
 import { getAllRequestCompany } from "./controllers/get_all_request_company";
 const ROUTER = {
   create: "/request-company",
-  approval: "/request-company/approval/:id",
+  approval: "/request-company/approval/:email",
   getAll: "/request-company",
 };
 
