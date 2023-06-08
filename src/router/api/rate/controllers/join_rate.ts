@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import ProfileSchema from "@/models/profile";
 import RateSchema from "@/models/rate";
-import mongoose from "mongoose";
 
 export const joinRate = async (req: Request, res: Response) => {
   const { rateName } = req.query || {};

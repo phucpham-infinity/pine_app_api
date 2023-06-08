@@ -7,25 +7,29 @@ import { register } from "./controllers/register";
 import { loginWithPhone } from "./controllers/loginWithPhone";
 import { me } from "./controllers/me";
 import { updateByPhone } from "./controllers/updateByPhone";
+import { getByPhone } from "./controllers/getByPhone";
 
 const ROUTER = {
   register: "/user/register",
   loginWithPhone: "/user/login-with-phone",
   me: "/user/me",
   updateByPhone: "/user/update-by-phone",
+  userByPhone: "/user/phone/:phone",
 };
 
 export const UserRouter = express.Router();
 
-UserRouter.use(ROUTER.register, validate(registerDto))
-  .route(ROUTER.register)
-  .post(register);
+UserRouter.route(ROUTER.register).post([validate(registerDto), register]);
 
-UserRouter.use(ROUTER.loginWithPhone, validate(loginDto))
-  .route(ROUTER.loginWithPhone)
-  .post(loginWithPhone);
+UserRouter.route(ROUTER.loginWithPhone).post([
+  validate(loginDto),
+  loginWithPhone,
+]);
 
-UserRouter.use(ROUTER.me, verifyToken).route(ROUTER.me).get(me);
-UserRouter.use(ROUTER.updateByPhone, validate(updateByPhoneDto))
-  .route(ROUTER.updateByPhone)
-  .post(updateByPhone);
+UserRouter.route(ROUTER.me).get([verifyToken, me]);
+UserRouter.route(ROUTER.userByPhone).get([getByPhone]);
+
+UserRouter.route(ROUTER.updateByPhone).post([
+  validate(updateByPhoneDto),
+  updateByPhone,
+]);
