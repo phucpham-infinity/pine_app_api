@@ -6,3 +6,5 @@ export * from "./analytics";
 export * from "./request_company";
 export * from "./rate";
 export * from "./request_delivery";
+export * from "./request_account";
+export * from "./account";

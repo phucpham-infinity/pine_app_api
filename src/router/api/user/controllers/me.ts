@@ -36,6 +36,15 @@ export const me = async (req: Request, res: Response) => {
     },
     { $unwind: { path: "$profile.rate", preserveNullAndEmptyArrays: true } },
     {
+      $lookup: {
+        from: "accounts",
+        localField: "user.phone",
+        foreignField: "phone",
+        as: "accounts",
+      },
+    },
+    { $unwind: { path: "$profile.rate", preserveNullAndEmptyArrays: true } },
+    {
       $match: {
         phone: user.phone,
       },

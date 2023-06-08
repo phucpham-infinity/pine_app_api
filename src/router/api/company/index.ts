@@ -1,5 +1,5 @@
 import express from "express";
-import { validate, verifyToken } from "@/middleware";
+import { validate } from "@/middleware";
 
 import { createCompanyDto } from "./dto";
 import { createCompany } from "./controllers/create_company";
@@ -10,6 +10,6 @@ const ROUTER = {
 
 export const CompanyRouter = express.Router();
 
-CompanyRouter.use(ROUTER.register, [verifyToken, validate(createCompanyDto)])
+CompanyRouter.use(ROUTER.register, [validate(createCompanyDto)])
   .route(ROUTER.register)
   .post(createCompany);
