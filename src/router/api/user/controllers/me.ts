@@ -4,7 +4,6 @@ import { omit } from "lodash";
 
 export const me = async (req: Request, res: Response) => {
   const { user } = req;
-  console.log("user", user);
 
   const user2 = await UserSchema.aggregate([
     {
@@ -27,6 +26,15 @@ export const me = async (req: Request, res: Response) => {
       },
     },
     { $unwind: { path: "$profile.company", preserveNullAndEmptyArrays: true } },
+    {
+      $lookup: {
+        from: "rates",
+        localField: "profile.rate",
+        foreignField: "_id",
+        as: "profile.rate",
+      },
+    },
+    { $unwind: { path: "$profile.rate", preserveNullAndEmptyArrays: true } },
     {
       $match: {
         phone: user.phone,

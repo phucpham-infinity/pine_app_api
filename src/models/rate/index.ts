@@ -2,7 +2,7 @@ import { omit } from "lodash";
 import { IBaseModal, createSchema } from "@/helpers";
 import mongoose from "mongoose";
 
-export interface IRateType extends IBaseModal {
+export interface IRate extends IBaseModal {
   name: string;
   fee: string;
   transactions: string;
@@ -24,4 +24,4 @@ RateSchema.method("doc", function () {
   return omit(this._doc, ["password", "__v"]);
 });
 
-export default mongoose.model<IRateType>("Rate", RateSchema);
+export default mongoose.model<IRate>("Rate", RateSchema);

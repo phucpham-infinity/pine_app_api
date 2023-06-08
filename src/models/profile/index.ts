@@ -3,6 +3,7 @@ import { IBaseModal, createSchema } from "@/helpers";
 import mongoose from "mongoose";
 import { ICompany } from "../company";
 import { IUser } from "../user";
+import { IRate } from "../rate";
 
 export interface IProfile extends IBaseModal {
   firstName: string;
@@ -14,6 +15,7 @@ export interface IProfile extends IBaseModal {
   expiryDate?: string;
   company?: ICompany;
   user?: IUser;
+  rate?: IRate;
 }
 
 const ProfileSchema = createSchema({
@@ -25,6 +27,7 @@ const ProfileSchema = createSchema({
   issueDate: { type: Date, required: false },
   expiryDate: { type: Date, required: false },
   company: { type: mongoose.Types.ObjectId, ref: "Company", required: false },
+  rate: { type: mongoose.Types.ObjectId, ref: "Company", required: false },
   user: {
     type: mongoose.Types.ObjectId,
     ref: "User",
