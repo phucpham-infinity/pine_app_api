@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import AccountSchema from "@/models/account";
-import UserSchema from "@/models/user";
 
 export const createAccount = async (req: Request, res: Response) => {
   const { accountName, accountNumber, iban, swiftCode } = req.body as any;

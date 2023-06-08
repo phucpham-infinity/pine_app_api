@@ -38,7 +38,7 @@ export const me = async (req: Request, res: Response) => {
     {
       $lookup: {
         from: "accounts",
-        localField: "user.phone",
+        localField: "phone",
         foreignField: "phone",
         as: "accounts",
       },
