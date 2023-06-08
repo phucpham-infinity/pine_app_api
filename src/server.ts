@@ -12,6 +12,7 @@ import {
   ProfileRouter,
   AnalyticsRouter,
   RequestCompanyRouter,
+  RateRouter,
 } from "@/router/api";
 
 import { RootRender } from "@/router/public";
@@ -54,6 +55,7 @@ app.use("/api", [
   ProfileRouter,
   AnalyticsRouter,
   RequestCompanyRouter,
+  RateRouter,
 ]);
 
 app.get("*", RootRender);
