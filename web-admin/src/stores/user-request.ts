@@ -13,13 +13,16 @@ export const useUserRequestStore = defineStore("userRequest", {
   actions: {
     async getUserRequest() {
       this._isLoading = true;
-      const res = await useService().get("/request-company?status=PENDING");
-      this._data = res?.data;
-      this._isLoading = false;
+      const res = await useService()
+        .get("/request-company?status=PENDING")
+        .finally(() => {
+          this._isLoading = false;
+        });
+      if (res?.data) this._data = res?.data;
     },
     async approvalRequest(email: string) {
       this._isLoading = true;
-      await useService().post("/request-company/approval/" + email);
+      await useService().put("/request-company/approval/" + email);
       this.getUserRequest();
     },
   },
