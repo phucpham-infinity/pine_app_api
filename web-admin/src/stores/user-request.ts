@@ -22,7 +22,11 @@ export const useUserRequestStore = defineStore("userRequest", {
     },
     async approvalRequest(email: string) {
       this._isLoading = true;
-      await useService().put("/request-company/approval/" + email);
+      await useService()
+        .put(`/request-company/approval?email=${email}`)
+        .catch(() => {
+          this._isLoading = false;
+        });
       this.getUserRequest();
     },
   },
