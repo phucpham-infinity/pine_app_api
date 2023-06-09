@@ -14,6 +14,7 @@ const ROUTER = {
 export const RequestCompanyRouter = express.Router();
 
 RequestCompanyRouter.route(ROUTER.create).post([
+  verifyToken,
   validate(createRequetCompanyDto),
   createRequestCompany,
 ]);

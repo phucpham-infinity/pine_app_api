@@ -12,6 +12,7 @@ export interface IUser extends IBaseModal {
   phone: string;
   isUseFaceId?: boolean;
   isUseTouchId?: boolean;
+  status: "PENDING" | "APPROVAL" | "REJECT";
   comparePassword: (
     candidatePassword: string,
     cb: (err: any, isMatch: boolean) => any
@@ -24,7 +25,6 @@ const UserSchema = createSchema({
   isUseFaceId: { type: Boolean, required: false },
   isUseTouchId: { type: Boolean, required: false },
   password: { type: String, required: true },
-  profile: { type: mongoose.Types.ObjectId, ref: "Profile" },
 });
 
 UserSchema.method("doc", function () {

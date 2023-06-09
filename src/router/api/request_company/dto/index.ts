@@ -16,6 +16,5 @@ export const updateRequetCompanyDto = z.object({
     licenseNo: z.string().optional(),
     registerNo: z.string().optional(),
     companyEmail: z.string().optional(),
-    userEmail: z.string().optional(),
   }),
 });

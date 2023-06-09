@@ -43,6 +43,16 @@ export const me = async (req: Request, res: Response) => {
       },
     },
     { $unwind: { path: "$company", preserveNullAndEmptyArrays: true } },
+    // Request Company
+    {
+      $lookup: {
+        from: "requestcompanies",
+        localField: "phone",
+        foreignField: "phone",
+        as: "requestCompany",
+      },
+    },
+    { $unwind: { path: "$requestCompany", preserveNullAndEmptyArrays: true } },
     // Rate
     {
       $lookup: {
