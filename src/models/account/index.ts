@@ -9,6 +9,7 @@ export interface IAccount extends IBaseModal {
   iban: string;
   swiftCode: string;
   user: IUser;
+  balance: number;
 }
 
 const AccountSchema = createSchema({
@@ -17,6 +18,7 @@ const AccountSchema = createSchema({
   iban: { type: String, required: true, unique: true },
   swiftCode: { type: String, required: true },
   phone: { type: String, required: true },
+  balance: { type: Number, required: true, default: 0 },
 });
 
 AccountSchema.method("doc", function () {

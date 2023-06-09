@@ -1,9 +1,6 @@
 import { omit } from "lodash";
 import { IBaseModal, createSchema } from "@/helpers";
 import mongoose from "mongoose";
-import { ICompany } from "../company";
-import { IUser } from "../user";
-import { IRate } from "../rate";
 
 export interface IProfile extends IBaseModal {
   firstName: string;
