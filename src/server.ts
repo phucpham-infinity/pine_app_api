@@ -16,6 +16,7 @@ import {
   RequestDeliveryRouter,
   RequestAccountRouter,
   AccountRouter,
+  TransactionRouter,
 } from "@/router/api";
 
 import { RootRender } from "@/router/public";
@@ -62,6 +63,7 @@ app.use("/api", [
   RequestDeliveryRouter,
   RequestAccountRouter,
   AccountRouter,
+  TransactionRouter,
 ]);
 
 app.get("*", RootRender);
