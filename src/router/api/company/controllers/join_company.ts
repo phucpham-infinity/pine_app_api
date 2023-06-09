@@ -1,14 +1,14 @@
 import { Request, Response } from "express";
-import UserRateRefSchema from "@/models/user_rate_ref";
+import UserCompanyRefSchema from "@/models/user_company_ref";
 
-export const joinRate = async (req: Request, res: Response) => {
-  const { rateName } = req.query || {};
+export const joinCompany = async (req: Request, res: Response) => {
+  const { companyName } = req.query || {};
   const { phone } = req.user || {};
 
   try {
-    const newData = new UserRateRefSchema({
+    const newData = new UserCompanyRefSchema({
       phone,
-      rateName,
+      companyName,
     });
     const dataNew = await newData.save();
     return res.status(200).json({ status: "ok", data: dataNew?.doc() });

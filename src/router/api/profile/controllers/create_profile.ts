@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import ProfileSchema from "@/models/profile";
-import UserSchema from "@/models/user";
-import CompanySchema from "@/models/company";
+import UserProfileRef from "@/models/user_profile_ref";
 
 export const createCompany = async (req: Request, res: Response) => {
   const {
@@ -12,21 +11,10 @@ export const createCompany = async (req: Request, res: Response) => {
     lastName,
     nationality,
     passportNumber,
-    phone,
-    companyName,
   } = req.body as any;
+  const { phone } = req?.user || {};
   try {
-    const user = await UserSchema.findOne({ phone });
-    if (!user)
-      return res.status(400).json({ status: 400, error: "User not found!" });
-    let company: any = {};
-    if (companyName) {
-      company = await CompanySchema.findOne({ companyName });
-    }
-
     const newProfile = new ProfileSchema({
-      user: user?.id,
-      company: company?.id,
       IDNumber,
       firstName,
       expiryDate,
@@ -36,6 +24,11 @@ export const createCompany = async (req: Request, res: Response) => {
       passportNumber,
     });
     const profileNew = await newProfile.save();
+    const refNew = new UserProfileRef({
+      phone,
+      profileId: profileNew.id,
+    });
+    await refNew.save();
     return res.status(200).json({ status: "ok", data: profileNew.doc() });
   } catch (error) {
     return res.status(400).json({ status: 400, error });

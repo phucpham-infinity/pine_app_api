@@ -6,35 +6,54 @@ export const me = async (req: Request, res: Response) => {
   const { user } = req;
 
   const user2 = await UserSchema.aggregate([
+    { $unwind: { path: "$profile.company", preserveNullAndEmptyArrays: true } },
+    // profile
     {
       $lookup: {
-        from: "profiles",
-        localField: "_id",
-        foreignField: "user",
+        from: "userprofilerefs",
+        localField: "phone",
+        foreignField: "phone",
         as: "profile",
       },
     },
     {
-      $unwind: { path: "$profile", preserveNullAndEmptyArrays: true },
+      $lookup: {
+        from: "profiles",
+        localField: "profile.profileId",
+        foreignField: "_id",
+        as: "profile",
+      },
+    },
+    { $unwind: { path: "$profile", preserveNullAndEmptyArrays: true } },
+    // Company
+    {
+      $lookup: {
+        from: "usercompanyrefs",
+        localField: "phone",
+        foreignField: "phone",
+        as: "company",
+      },
     },
     {
       $lookup: {
         from: "companies",
-        localField: "profile.company",
-        foreignField: "_id",
-        as: "profile.company",
+        localField: "company.companyName",
+        foreignField: "companyName",
+        as: "company",
       },
     },
-    { $unwind: { path: "$profile.company", preserveNullAndEmptyArrays: true } },
+    { $unwind: { path: "$company", preserveNullAndEmptyArrays: true } },
+    // Rate
     {
       $lookup: {
-        from: "rates",
-        localField: "profile.rate",
-        foreignField: "_id",
-        as: "profile.rate",
+        from: "userraterefs",
+        localField: "phone",
+        foreignField: "phone",
+        as: "rate",
       },
     },
-    { $unwind: { path: "$profile.rate", preserveNullAndEmptyArrays: true } },
+    { $unwind: { path: "$rate", preserveNullAndEmptyArrays: true } },
+    // accounts
     {
       $lookup: {
         from: "accounts",

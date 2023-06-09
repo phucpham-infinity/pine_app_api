@@ -13,9 +13,6 @@ export interface IProfile extends IBaseModal {
   passportNumber?: string;
   issueDate?: string;
   expiryDate?: string;
-  company?: ICompany;
-  user?: IUser;
-  rate?: IRate;
 }
 
 const ProfileSchema = createSchema({
@@ -26,14 +23,6 @@ const ProfileSchema = createSchema({
   passportNumber: { type: String, required: false },
   issueDate: { type: Date, required: false },
   expiryDate: { type: Date, required: false },
-  company: { type: mongoose.Types.ObjectId, ref: "Company", required: false },
-  rate: { type: mongoose.Types.ObjectId, ref: "Company", required: false },
-  user: {
-    type: mongoose.Types.ObjectId,
-    ref: "User",
-    required: true,
-    unique: true,
-  },
 });
 
 ProfileSchema.method("doc", function () {

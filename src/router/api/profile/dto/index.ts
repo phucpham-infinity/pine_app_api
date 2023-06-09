@@ -2,7 +2,6 @@ import { z } from "zod";
 
 export const createProfileDto = z.object({
   body: z.object({
-    phone: z.string(),
     firstName: z.string(),
     lastName: z.string(),
     nationality: z.string(),
@@ -10,7 +9,6 @@ export const createProfileDto = z.object({
     passportNumber: z.string().optional(),
     issueDate: z.string().optional(),
     expiryDate: z.string().optional(),
-    companyId: z.string().optional(),
   }),
 });
 
@@ -23,7 +21,5 @@ export const updateProfileDto = z.object({
     passportNumber: z.string().optional(),
     issueDate: z.string().optional(),
     expiryDate: z.string().optional(),
-    companyName: z.string().optional(),
-    phone: z.string(),
   }),
 });

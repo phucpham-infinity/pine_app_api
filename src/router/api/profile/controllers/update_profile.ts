@@ -1,7 +1,5 @@
 import { Request, Response } from "express";
 import ProfileSchema from "@/models/profile";
-import UserSchema from "@/models/user";
-import CompanySchema from "@/models/company";
 
 export const upadateCompany = async (req: Request, res: Response) => {
   const {
@@ -12,24 +10,11 @@ export const upadateCompany = async (req: Request, res: Response) => {
     lastName,
     nationality,
     passportNumber,
-    phone,
-    companyName,
+    id,
   } = req.body as any;
   try {
-    const user = await UserSchema.findOne({ phone });
-    if (!user)
-      return res.status(400).json({ status: 400, error: "User not found!" });
-    let company: any = {};
-    if (companyName) {
-      company = await CompanySchema.findOne({ companyName });
-      if (!company)
-        return res
-          .status(400)
-          .json({ status: 400, error: "Company not found" });
-    }
-
-    const profile = await ProfileSchema.findOneAndUpdate(
-      { user: user.id },
+    const profile = await ProfileSchema.findByIdAndUpdate(
+      id,
       {
         $set: {
           IDNumber,
@@ -39,7 +24,6 @@ export const upadateCompany = async (req: Request, res: Response) => {
           lastName,
           nationality,
           passportNumber,
-          company: company?.id,
         },
       },
       { new: true }
