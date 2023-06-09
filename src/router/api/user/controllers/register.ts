@@ -18,7 +18,12 @@ export const register = async (req: Request, res: Response) => {
 
   try {
     const user = await newUser.save();
-    return res.status(200).json({ status: "ok", data: user.doc() });
+    return res
+      .status(200)
+      .json({
+        status: "ok",
+        data: { ...user.doc(), token: user.generateToken() },
+      });
   } catch (error) {
     return res.status(400).json({ status: 400, error });
   }
