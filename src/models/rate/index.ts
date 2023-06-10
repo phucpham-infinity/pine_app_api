@@ -9,7 +9,6 @@ export interface IRate extends IBaseModal {
   atmDeposits: string;
   addOns: string;
   books: string;
-  phone: string;
 }
 
 const RateSchema = createSchema({
@@ -19,7 +18,6 @@ const RateSchema = createSchema({
   atmDeposits: { type: String, required: true },
   addOns: { type: String, required: true },
   books: { type: String, required: true },
-  phone: { type: String, required: true, unique: true },
 });
 
 RateSchema.method("doc", function () {
