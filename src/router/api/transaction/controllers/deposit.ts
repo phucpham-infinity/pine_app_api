@@ -12,7 +12,7 @@ export const creatDepositTransaction = async (req: Request, res: Response) => {
     if (!account)
       return res.status(400).json({ status: 400, error: "Account not found!" });
 
-    if (!isNumber(amount))
+    if (!isNumber(+amount))
       return res.status(400).json({ status: 400, error: "Amount invalid!" });
 
     account.balance = Number(account?.balance) + Number(amount);
