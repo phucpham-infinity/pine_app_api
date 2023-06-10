@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import TransactionSchema from "@/models/transaction";
 import AccountSchema from "@/models/account";
+import { isNumber } from "lodash";
 
 export const creatDepositTransaction = async (req: Request, res: Response) => {
   const { accountId, amount, category, description } = req.body as any;
@@ -11,7 +12,10 @@ export const creatDepositTransaction = async (req: Request, res: Response) => {
     if (!account)
       return res.status(400).json({ status: 400, error: "Account not found!" });
 
-    account.balance = account?.balance + amount;
+    if (!isNumber(amount))
+      return res.status(400).json({ status: 400, error: "Amount invalid!" });
+
+    account.balance = Number(account?.balance) + Number(amount);
     await account.save();
 
     const newData = new TransactionSchema({
