@@ -20,7 +20,7 @@ export const creatDepositTransaction = async (req: Request, res: Response) => {
 
     const newData = new TransactionSchema({
       accountId,
-      amount,
+      amount: Number(amount),
       category,
       description,
       type: "DEPOSIT",
