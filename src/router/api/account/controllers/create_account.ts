@@ -2,7 +2,8 @@ import { Request, Response } from "express";
 import AccountSchema from "@/models/account";
 
 export const createAccount = async (req: Request, res: Response) => {
-  const { accountName, accountNumber, iban, swiftCode } = req.body as any;
+  const { accountName, accountNumber, iban, swiftCode, isMain } =
+    req.body as any;
   const { user } = req || {};
 
   try {
@@ -11,6 +12,7 @@ export const createAccount = async (req: Request, res: Response) => {
       accountNumber,
       iban,
       swiftCode,
+      isMain,
       phone: user.phone,
     });
     const dataNew = await newData.save();

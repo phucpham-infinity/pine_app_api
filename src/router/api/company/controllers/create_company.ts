@@ -3,8 +3,15 @@ import CompanySchema from "@/models/company";
 import { ICompany } from "@/models/company";
 
 export const createCompany = async (req: Request, res: Response) => {
-  const { businessActivity, companyName, email, legalType, numberOfEmployees } =
-    req.body as Partial<ICompany>;
+  const {
+    businessActivity,
+    companyName,
+    email,
+    legalType,
+    numberOfEmployees,
+    licenseNumber,
+    backupEmail,
+  } = req.body as Partial<ICompany>;
 
   const newCompany = new CompanySchema({
     businessActivity,
@@ -12,6 +19,8 @@ export const createCompany = async (req: Request, res: Response) => {
     email,
     legalType,
     numberOfEmployees,
+    licenseNumber,
+    backupEmail,
   });
 
   try {

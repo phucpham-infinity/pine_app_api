@@ -8,7 +8,7 @@ import { joinRate } from "./controllers/join_rate";
 
 const ROUTER = {
   create: "/rate",
-  update: "/rate",
+  update: "/rate/:name",
   getAll: "/rate",
   join: "/rate/join",
 };

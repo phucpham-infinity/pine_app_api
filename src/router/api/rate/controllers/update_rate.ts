@@ -2,8 +2,9 @@ import { Request, Response } from "express";
 import RateSchema from "@/models/rate";
 
 export const updateRate = async (req: Request, res: Response) => {
-  const { name, fee, transactions, atmDeposits, addOns, books } =
-    req.body as any;
+  const { fee, transactions, atmDeposits, addOns, books } = req.body as any;
+
+  const { name } = req.params;
   try {
     const newRate = await RateSchema.findOneAndUpdate(
       { name },

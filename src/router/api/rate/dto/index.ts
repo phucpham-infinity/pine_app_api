@@ -13,7 +13,6 @@ export const createRateDto = z.object({
 
 export const updateRateDto = z.object({
   body: z.object({
-    name: z.string().optional(),
     fee: z.string().optional(),
     transactions: z.string().optional(),
     atmDeposits: z.string().optional(),
