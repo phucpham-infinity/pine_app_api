@@ -15,7 +15,6 @@ export const createCompanyDto = z.object({
 export const updateCompanyDto = z.object({
   body: z.object({
     businessActivity: z.string().optional(),
-    companyName: z.string(),
     email: z.string().optional(),
     backupEmail: z.string().optional(),
     legalType: z.string().optional(),
