@@ -3,13 +3,13 @@ import { IBaseModal, createSchema } from "@/helpers";
 import mongoose from "mongoose";
 
 export interface IUserCompanyRef extends IBaseModal {
-  phone: string;
-  companyName: string;
+  userId: string;
+  companyId: string;
 }
 
 const UserCompanyRefSchema = createSchema({
-  phone: { type: String, required: true, unique: true },
-  companyName: { type: String, required: true },
+  userId: { type: mongoose.Types.ObjectId, ref: "User", required: true },
+  companyId: { type: mongoose.Types.ObjectId, ref: "Company", required: true },
 });
 
 UserCompanyRefSchema.method("doc", function () {

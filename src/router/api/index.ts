@@ -9,3 +9,4 @@ export * from "./request_delivery";
 export * from "./request_account";
 export * from "./account";
 export * from "./transaction";
+export * from "./card";

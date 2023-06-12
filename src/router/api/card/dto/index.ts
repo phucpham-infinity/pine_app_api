@@ -7,7 +7,7 @@ export const createRateDto = z.object({
     status: z.string(),
     cardNumber: z.string(),
     accountNumber: z.string(),
-    accountId: z.string(),
+    isMain: z.boolean().optional(),
   }),
 });
 
@@ -18,5 +18,6 @@ export const updateRateDto = z.object({
     status: z.string().optional(),
     cardNumber: z.string().optional(),
     accountNumber: z.string().optional(),
+    isMain: z.boolean().optional(),
   }),
 });

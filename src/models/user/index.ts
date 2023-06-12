@@ -28,7 +28,7 @@ const UserSchema = createSchema({
 });
 
 UserSchema.method("doc", function () {
-  return omit(this._doc, ["password", "__v"]);
+  return omit(this._doc, ["password"]);
 });
 
 UserSchema.pre("save", function (next) {

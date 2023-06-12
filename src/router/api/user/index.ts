@@ -8,13 +8,17 @@ import { loginWithPhone } from "./controllers/loginWithPhone";
 import { me } from "./controllers/me";
 import { updateByPhone } from "./controllers/updateByPhone";
 import { getByPhone } from "./controllers/getByPhone";
+import { findAll } from "./controllers/findAll";
+import { findById } from "./controllers/findById";
 
 const ROUTER = {
   register: "/user/register",
   loginWithPhone: "/user/login-with-phone",
   me: "/user/me",
+  all: "/user",
   updateByPhone: "/user/update-by-phone",
   userByPhone: "/user/phone/:phone",
+  userById: "/user/:id",
 };
 
 export const UserRouter = express.Router();
@@ -33,3 +37,6 @@ UserRouter.route(ROUTER.updateByPhone).post([
   validate(updateByPhoneDto),
   updateByPhone,
 ]);
+
+UserRouter.route(ROUTER.all).get([verifyToken, findAll]);
+UserRouter.route(ROUTER.userById).get([verifyToken, findById]);

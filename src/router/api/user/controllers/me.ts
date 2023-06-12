@@ -1,12 +1,15 @@
 import { Request, Response } from "express";
 import UserSchema from "@/models/user";
 import { omit } from "lodash";
+import mongoose from "mongoose";
+
+const ObjectId = mongoose.Types.ObjectId;
 
 export const me = async (req: Request, res: Response) => {
-  const { user } = req;
+  const { _id } = req.user || {};
+  const id = new ObjectId(_id);
 
-  const user2 = await UserSchema.aggregate([
-    { $unwind: { path: "$profile.company", preserveNullAndEmptyArrays: true } },
+  const meData = await UserSchema.aggregate([
     // profile
     {
       $lookup: {
@@ -29,16 +32,16 @@ export const me = async (req: Request, res: Response) => {
     {
       $lookup: {
         from: "usercompanyrefs",
-        localField: "phone",
-        foreignField: "phone",
+        localField: "_id",
+        foreignField: "userId",
         as: "company",
       },
     },
     {
       $lookup: {
         from: "companies",
-        localField: "company.companyName",
-        foreignField: "companyName",
+        localField: "company.companyId",
+        foreignField: "_id",
         as: "company",
       },
     },
@@ -73,15 +76,12 @@ export const me = async (req: Request, res: Response) => {
       },
     },
     { $unwind: { path: "$profile.rate", preserveNullAndEmptyArrays: true } },
-    {
-      $match: {
-        phone: user.phone,
-      },
-    },
+    { $match: { _id: id } },
   ]);
-  if (!user2)
+
+  if (!meData)
     return res.status(400).json({ status: 400, error: "User not found!" });
   return res
     .status(200)
-    .json({ status: "ok", data: omit(user2?.[0], ["password", "__v"]) });
+    .json({ status: "ok", data: omit(meData?.[0], ["password", "__v"]) });
 };
