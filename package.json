@@ -7,9 +7,8 @@
     "start": "node index.js",
     "dev": "rollup -c --bundleConfigAsCjs -w",
     "build": "yarn install",
-    "build2": "NODE_ENV=production & rollup -c --bundleConfigAsCjs",
-    "kill": "npx kill-port 3000",
-    "deploy": ""
+    "deploy": "rm -rf index.js & NODE_ENV=production & rollup -c --bundleConfigAsCjs",
+    "kill": "npx kill-port 3000"
   },
   "keywords": [],
   "author": "",

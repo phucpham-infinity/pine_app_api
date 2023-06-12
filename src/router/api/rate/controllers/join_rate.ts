@@ -19,7 +19,6 @@ export const joinRate = async (req: Request, res: Response) => {
       );
       return res.status(200).json({ status: "ok", data: newRefData?.doc() });
     }
-
     const newData = new UserRateRefSchema({
       phone,
       rateName,
