@@ -7,6 +7,7 @@ export const createRateDto = z.object({
     status: z.string(),
     cardNumber: z.string(),
     accountNumber: z.string(),
+    accountId: z.string(),
   }),
 });
 

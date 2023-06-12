@@ -8,6 +8,8 @@ export interface ICard extends IBaseModal {
   status: string;
   cardNumber: string;
   accountNumber: string;
+  isMain?: boolean;
+  accountId?: String;
 }
 
 const CardSchema = createSchema({
@@ -16,6 +18,8 @@ const CardSchema = createSchema({
   status: { type: String, required: true },
   cardNumber: { type: String, required: true },
   accountNumber: { type: String, required: true },
+  isMain: { type: Boolean, required: false, default: false },
+  accountId: { type: mongoose.Types.ObjectId, ref: "Account" },
 });
 
 CardSchema.method("doc", function () {

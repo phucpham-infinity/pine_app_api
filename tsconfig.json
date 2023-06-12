@@ -14,5 +14,5 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["./src/**/*.ts", "src/server.d.ts", "src/router/public/index.ts", "src/**/*.d.ts"]
+  "include": ["./src/**/*.ts", "src/server.d.ts", "src/router/public/index.ts", "src/**/*.d.ts", "src/router/api/rate/controllers/update_user_ref_ratets"]
 }

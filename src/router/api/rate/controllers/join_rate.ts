@@ -6,6 +6,20 @@ export const joinRate = async (req: Request, res: Response) => {
   const { phone } = req.user || {};
 
   try {
+    const refData = await UserRateRefSchema.findOne({ phone });
+    if (refData) {
+      const newRefData = await UserRateRefSchema.findOneAndUpdate(
+        { phone },
+        {
+          $set: {
+            rateName,
+          },
+        },
+        { new: true }
+      );
+      return res.status(200).json({ status: "ok", data: newRefData?.doc() });
+    }
+
     const newData = new UserRateRefSchema({
       phone,
       rateName,
