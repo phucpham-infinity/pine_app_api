@@ -12,11 +12,11 @@ export const updateCompany = async (req: Request, res: Response) => {
     coverUrl,
   } = req.body as any;
 
-  const { name } = req.params;
+  const { id } = req.params;
 
   try {
-    const newCompany = await CompanySchema.findOneAndUpdate(
-      { companyName: name },
+    const newCompany = await CompanySchema.findByIdAndUpdate(
+      id,
       {
         $set: {
           businessActivity,
@@ -30,6 +30,8 @@ export const updateCompany = async (req: Request, res: Response) => {
       },
       { new: true }
     );
+    if (!newCompany)
+      res.status(400).json({ status: 400, error: "Company not found!" });
     return res.status(200).json({ status: "ok", data: newCompany?.doc() });
   } catch (error) {
     return res.status(400).json({ status: 400, error });

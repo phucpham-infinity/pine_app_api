@@ -9,7 +9,7 @@ import { getCompanyByName } from "./controllers/get_company_by_name";
 
 const ROUTER = {
   create: "/company",
-  update: "/company/:name",
+  update: "/company/:id",
   getByName: "/company/:name",
   join: "/company/join",
 };
