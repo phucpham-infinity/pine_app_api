@@ -1,14 +1,13 @@
 import { omit } from "lodash";
 import { IBaseModal, createSchema } from "@/helpers";
 import mongoose from "mongoose";
-import { IUser } from "../user";
 
 export interface IAccount extends IBaseModal {
   accountName: string;
   accountNumber: string;
   iban: string;
   swiftCode: string;
-  user: IUser;
+  userId: string;
   balance: number;
   isMain?: boolean;
 }
@@ -18,9 +17,9 @@ const AccountSchema = createSchema({
   accountNumber: { type: String, required: true, unique: true },
   iban: { type: String, required: true, unique: true },
   swiftCode: { type: String, required: true },
-  phone: { type: String, required: true },
   balance: { type: Number, required: true, default: 0 },
   isMain: { type: Boolean, required: false, default: false },
+  userId: { type: mongoose.Types.ObjectId, ref: "User", required: true },
 });
 
 AccountSchema.method("doc", function () {

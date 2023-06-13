@@ -4,7 +4,7 @@ import AccountSchema from "@/models/account";
 export const createAccount = async (req: Request, res: Response) => {
   const { accountName, accountNumber, iban, swiftCode, isMain } =
     req.body as any;
-  const { user } = req || {};
+  const { _id } = req.user || {};
 
   try {
     const newData = new AccountSchema({
@@ -13,7 +13,7 @@ export const createAccount = async (req: Request, res: Response) => {
       iban,
       swiftCode,
       isMain,
-      phone: user.phone,
+      userId: _id,
     });
     const dataNew = await newData.save();
     return res.status(200).json({ status: "ok", data: dataNew.doc() });

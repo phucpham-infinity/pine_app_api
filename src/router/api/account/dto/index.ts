@@ -6,7 +6,7 @@ export const createAccountDto = z.object({
     accountNumber: z.string(),
     iban: z.string(),
     swiftCode: z.string(),
-    isMain: z.boolean(),
+    isMain: z.boolean().optional(),
   }),
 });
 
