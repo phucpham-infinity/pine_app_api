@@ -10,6 +10,7 @@ export interface ICompany extends IBaseModal {
   numberOfEmployees: number;
   licenseNumber?: string;
   backupEmail?: string;
+  coverUrl?: string;
 }
 
 const CompanySchema = createSchema({
@@ -20,6 +21,7 @@ const CompanySchema = createSchema({
   numberOfEmployees: { type: Number, required: true },
   licenseNumber: { type: String, required: false, default: "" },
   backupEmail: { type: String, required: false, default: "" },
+  coverUrl: { type: String, required: false },
 });
 
 CompanySchema.method("doc", function () {

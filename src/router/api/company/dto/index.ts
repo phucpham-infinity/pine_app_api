@@ -9,6 +9,7 @@ export const createCompanyDto = z.object({
     numberOfEmployees: z.number(),
     licenseNumber: z.string().optional(),
     backupEmail: z.string().optional(),
+    coverUrl: z.string().optional(),
   }),
 });
 
@@ -20,5 +21,6 @@ export const updateCompanyDto = z.object({
     legalType: z.string().optional(),
     numberOfEmployees: z.number().optional(),
     licenseNumber: z.string().optional(),
+    coverUrl: z.string().optional(),
   }),
 });

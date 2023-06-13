@@ -9,6 +9,7 @@ export const updateCompany = async (req: Request, res: Response) => {
     numberOfEmployees,
     licenseNumber,
     backupEmail,
+    coverUrl,
   } = req.body as any;
 
   const { name } = req.params;
@@ -24,6 +25,7 @@ export const updateCompany = async (req: Request, res: Response) => {
           numberOfEmployees,
           licenseNumber,
           backupEmail,
+          coverUrl,
         },
       },
       { new: true }

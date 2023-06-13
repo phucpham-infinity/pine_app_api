@@ -66,6 +66,16 @@ export const me = async (req: Request, res: Response) => {
       },
     },
     { $unwind: { path: "$rate", preserveNullAndEmptyArrays: true } },
+    // setting
+    {
+      $lookup: {
+        from: "settings",
+        localField: "_id",
+        foreignField: "userId",
+        as: "setting",
+      },
+    },
+    { $unwind: { path: "$setting", preserveNullAndEmptyArrays: true } },
     // accounts
     {
       $lookup: {

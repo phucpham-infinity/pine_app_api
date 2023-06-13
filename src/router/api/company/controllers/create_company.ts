@@ -11,6 +11,7 @@ export const createCompany = async (req: Request, res: Response) => {
     numberOfEmployees,
     licenseNumber,
     backupEmail,
+    coverUrl,
   } = req.body as Partial<ICompany>;
 
   const newCompany = new CompanySchema({
@@ -21,6 +22,7 @@ export const createCompany = async (req: Request, res: Response) => {
     numberOfEmployees,
     licenseNumber,
     backupEmail,
+    coverUrl,
   });
 
   try {
