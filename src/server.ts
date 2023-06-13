@@ -20,6 +20,7 @@ import {
   CardRouter,
   SettingRouter,
   AtachmentRouter,
+  ChatRouter,
 } from "@/router/api";
 
 import { RootRender } from "@/router/public";
@@ -70,6 +71,7 @@ app.use("/api", [
   CardRouter,
   SettingRouter,
   AtachmentRouter,
+  ChatRouter,
 ]);
 
 app.get("*", RootRender);

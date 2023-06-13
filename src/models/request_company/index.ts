@@ -8,7 +8,7 @@ export interface IRequestCompany extends IBaseModal {
   registerNo: string;
   companyEmail: string;
   userEmail: string;
-  phone: string;
+  userId: string;
   status: "PENDING" | "APPROVAL" | "REJECT";
 }
 
@@ -18,7 +18,7 @@ const RequestCompanySchema = createSchema({
   registerNo: { type: String, required: true },
   companyEmail: { type: String, required: true },
   userEmail: { type: String, required: true, unique: true },
-  phone: { type: String, required: true, unique: true },
+  userId: { type: mongoose.Types.ObjectId, ref: "User", required: true },
   status: {
     type: String,
     enum: ["PENDING", "APPROVAL", "REJECT"],

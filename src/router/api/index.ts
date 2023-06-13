@@ -12,3 +12,4 @@ export * from "./transaction";
 export * from "./card";
 export * from "./setting";
 export * from "./atachment";
+export * from "./chat";
