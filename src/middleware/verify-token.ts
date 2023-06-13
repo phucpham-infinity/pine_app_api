@@ -17,7 +17,7 @@ export const verifyToken = (
   }
   try {
     const decoded = jwt.verify(token, process.env.TOKEN_SECRET || "MICRO_APP");
-    req.user = decoded;
+    req.user = decoded as any;
   } catch (err) {
     return res.status(401).json({
       status: 401,

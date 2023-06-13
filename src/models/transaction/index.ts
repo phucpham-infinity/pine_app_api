@@ -4,22 +4,22 @@ import mongoose from "mongoose";
 
 export interface ITransactions extends IBaseModal {
   accountId: string;
+  createdBy: string;
   type: string;
   amount: number;
   category: string;
   description: string;
   date: string;
-  phone: string;
 }
 
 const TransactionsSchema = createSchema({
-  accountId: { type: mongoose.Types.ObjectId, ref: "Account" },
-  type: { type: String, required: true },
-  phone: { type: String, required: true },
+  accountId: { type: mongoose.Types.ObjectId, ref: "Account", required: true },
+  createdBy: { type: mongoose.Types.ObjectId, ref: "User", required: true },
   amount: { type: Number, required: true },
   category: { type: String, required: true },
   description: { type: String, required: true },
   date: { type: String, required: true },
+  type: { type: String, required: true },
 });
 
 TransactionsSchema.method("doc", function () {

@@ -81,6 +81,9 @@ app
 
 declare module "express" {
   export interface Request {
-    user?: any;
+    user?: {
+      _id: string;
+      phone: string;
+    };
   }
 }

@@ -3,8 +3,11 @@ import TransactionSchema from "@/models/transaction";
 
 export const createTransaction = async (req: Request, res: Response) => {
   const { accountId, type, amount, category, description } = req.body as any;
+  const { _id } = req?.user || {};
+
   try {
     const newData = new TransactionSchema({
+      createdBy: _id,
       accountId,
       amount,
       category,
