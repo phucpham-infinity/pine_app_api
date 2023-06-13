@@ -4,11 +4,11 @@ import mongoose from "mongoose";
 
 export interface IUserRateRef extends IBaseModal {
   rateName: string;
-  phone: string;
+  userId: string;
 }
 
 const UserRateRefSchema = createSchema({
-  phone: { type: String, required: true, unique: true },
+  userId: { type: mongoose.Types.ObjectId, ref: "User", required: true },
   rateName: { type: String, required: true },
 });
 

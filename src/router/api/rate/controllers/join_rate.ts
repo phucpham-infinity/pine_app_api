@@ -3,13 +3,13 @@ import UserRateRefSchema from "@/models/user_rate_ref";
 
 export const joinRate = async (req: Request, res: Response) => {
   const { rateName } = req.query || {};
-  const { phone } = req.user || {};
+  const { _id } = req.user || {};
 
   try {
-    const refData = await UserRateRefSchema.findOne({ phone });
+    const refData = await UserRateRefSchema.findOne({ userId: _id });
     if (refData) {
       const newRefData = await UserRateRefSchema.findOneAndUpdate(
-        { phone },
+        { userId: _id },
         {
           $set: {
             rateName,
@@ -20,7 +20,7 @@ export const joinRate = async (req: Request, res: Response) => {
       return res.status(200).json({ status: "ok", data: newRefData?.doc() });
     }
     const newData = new UserRateRefSchema({
-      phone,
+      userId: _id,
       rateName,
     });
     const dataNew = await newData.save();
