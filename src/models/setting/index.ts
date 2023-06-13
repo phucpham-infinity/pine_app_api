@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 
 export interface ISetting extends IBaseModal {
   userId: string;
-  enableFaceID: boolean;
+  enableBiometric: boolean;
   confirmationMethods: "FACE_ID" | "PUSH_NOTIFICATION" | "TEXT_MESSAGE";
   receiveNotificationsForPaymentsAndTransfers: boolean;
   receiveNotificationsForDeposits: boolean;
@@ -20,7 +20,7 @@ const SettingSchema = createSchema({
     required: true,
     unique: true,
   },
-  enableFaceID: { type: Boolean, required: true, default: false },
+  enableBiometric: { type: Boolean, required: true, default: false },
   confirmationMethods: { type: String, required: true, default: "FACE_ID" },
   receiveNotificationsForPaymentsAndTransfers: {
     type: Boolean,

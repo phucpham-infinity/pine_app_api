@@ -7,7 +7,7 @@ const ObjectId = mongoose.Types.ObjectId;
 export const updateSetting = async (req: Request, res: Response) => {
   const {
     confirmationMethods,
-    enableFaceID,
+    enableBiometric,
     notificationMethods,
     receiveNotificationsForDeposits,
     receiveNotificationsForExceedingSetLimits,
@@ -25,7 +25,7 @@ export const updateSetting = async (req: Request, res: Response) => {
       {
         $set: {
           confirmationMethods,
-          enableFaceID,
+          enableBiometric,
           notificationMethods,
           receiveNotificationsForDeposits,
           receiveNotificationsForExceedingSetLimits,

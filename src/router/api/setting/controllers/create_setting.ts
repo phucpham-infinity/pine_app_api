@@ -4,7 +4,7 @@ import SettingSchema from "@/models/setting";
 export const createForMe = async (req: Request, res: Response) => {
   const {
     confirmationMethods,
-    enableFaceID,
+    enableBiometric,
     notificationMethods,
     receiveNotificationsForDeposits,
     receiveNotificationsForExceedingSetLimits,
@@ -16,7 +16,7 @@ export const createForMe = async (req: Request, res: Response) => {
     const newData = new SettingSchema({
       userId: _id,
       confirmationMethods,
-      enableFaceID,
+      enableBiometric,
       notificationMethods,
       receiveNotificationsForDeposits,
       receiveNotificationsForExceedingSetLimits,

@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const createSettingDto = z.object({
   body: z.object({
-    enableFaceID: z.boolean().optional(),
+    enableBiometric: z.boolean().optional(),
     confirmationMethods: z.string().optional(),
     receiveNotificationsForPaymentsAndTransfers: z.boolean().optional(),
     receiveNotificationsForDeposits: z.boolean().optional(),
@@ -14,7 +14,7 @@ export const createSettingDto = z.object({
 
 export const updateSettingDto = z.object({
   body: z.object({
-    enableFaceID: z.boolean().optional(),
+    enableBiometric: z.boolean().optional(),
     confirmationMethods: z.string().optional(),
     receiveNotificationsForPaymentsAndTransfers: z.boolean().optional(),
     receiveNotificationsForDeposits: z.boolean().optional(),
