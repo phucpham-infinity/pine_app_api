@@ -12,7 +12,7 @@ export const createCompany = async (req: Request, res: Response) => {
     nationality,
     passportNumber,
   } = req.body as any;
-  const { phone } = req?.user || {};
+  const { _id } = req?.user || {};
   try {
     const newProfile = new ProfileSchema({
       IDNumber,
@@ -25,8 +25,8 @@ export const createCompany = async (req: Request, res: Response) => {
     });
     const profileNew = await newProfile.save();
     const refNew = new UserProfileRef({
-      phone,
-      profileId: profileNew.id,
+      userId: _id,
+      yarn: profileNew.id,
     });
     await refNew.save();
     return res.status(200).json({ status: "ok", data: profileNew.doc() });

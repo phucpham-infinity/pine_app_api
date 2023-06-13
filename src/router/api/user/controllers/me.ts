@@ -14,8 +14,8 @@ export const me = async (req: Request, res: Response) => {
     {
       $lookup: {
         from: "userprofilerefs",
-        localField: "phone",
-        foreignField: "phone",
+        localField: "_id",
+        foreignField: "userId",
         as: "profile",
       },
     },

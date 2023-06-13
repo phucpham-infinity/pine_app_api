@@ -6,7 +6,7 @@ import { upadateCompany } from "./controllers/update_profile";
 
 const ROUTER = {
   create: "/profile",
-  update: "/profile",
+  update: "/profile/:id",
 };
 
 export const ProfileRouter = express.Router();

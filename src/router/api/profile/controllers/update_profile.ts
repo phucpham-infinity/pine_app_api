@@ -10,8 +10,9 @@ export const upadateCompany = async (req: Request, res: Response) => {
     lastName,
     nationality,
     passportNumber,
-    id,
   } = req.body as any;
+  const { id } = req.params || {};
+
   try {
     const profile = await ProfileSchema.findByIdAndUpdate(
       id,
@@ -28,6 +29,8 @@ export const upadateCompany = async (req: Request, res: Response) => {
       },
       { new: true }
     );
+    if (!profile)
+      res.status(400).json({ status: 400, error: "Profile not found!" });
 
     return res.status(200).json({ status: "ok", data: profile?.doc() });
   } catch (error) {

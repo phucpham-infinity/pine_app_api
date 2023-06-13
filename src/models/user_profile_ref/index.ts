@@ -3,12 +3,12 @@ import { IBaseModal, createSchema } from "@/helpers";
 import mongoose from "mongoose";
 
 export interface IUserProfileRef extends IBaseModal {
-  phone: string;
+  userId: string;
   profileId: string;
 }
 
 const UserProfileRefSchema = createSchema({
-  phone: { type: String, required: true, unique: true },
+  userId: { type: mongoose.Types.ObjectId, ref: "User", required: true },
   profileId: { type: mongoose.Types.ObjectId, ref: "Profile", unique: true },
 });
 
