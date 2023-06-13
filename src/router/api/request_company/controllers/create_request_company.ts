@@ -6,7 +6,7 @@ export const createRequestCompany = async (req: Request, res: Response) => {
   const { companyName, companyEmail, licenseNo, registerNo, userEmail } =
     req.body as Partial<IRequestCompany>;
 
-  const { phone } = req.user || {};
+  const { _id } = req.user || {};
 
   const newRequest = new RequestCompanySchema({
     companyName,
@@ -14,7 +14,7 @@ export const createRequestCompany = async (req: Request, res: Response) => {
     licenseNo,
     registerNo,
     userEmail,
-    phone: phone,
+    userId: _id,
   });
 
   try {
