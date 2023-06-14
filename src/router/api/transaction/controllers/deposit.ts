@@ -31,6 +31,6 @@ export const creatDepositTransaction = async (req: Request, res: Response) => {
 
     return res.status(200).json({ status: "ok", data: dataNew.doc() });
   } catch (error) {
-    return res.status(400).json({ status: 400, error });
+    return res.status(400).json({ status: 400, error: JSON.stringify(error) });
   }
 };
