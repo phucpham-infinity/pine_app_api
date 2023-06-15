@@ -10,6 +10,7 @@ export interface ITransactions extends IBaseModal {
   category: string;
   description: string;
   date: string;
+  cardNumber?: string;
 }
 
 const TransactionsSchema = createSchema({
@@ -20,6 +21,7 @@ const TransactionsSchema = createSchema({
   description: { type: String, required: true },
   date: { type: String, required: true },
   type: { type: String, required: true },
+  cardNumber: { type: String, required: false },
 });
 
 TransactionsSchema.method("doc", function () {

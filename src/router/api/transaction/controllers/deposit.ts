@@ -4,7 +4,8 @@ import AccountSchema from "@/models/account";
 import { isNumber } from "lodash";
 
 export const creatDepositTransaction = async (req: Request, res: Response) => {
-  const { accountId, amount, category, description } = req.body as any;
+  const { accountId, amount, category, description, cardNumber } =
+    req.body as any;
   const { _id } = req.user || {};
   try {
     const account = await AccountSchema.findById(accountId);
@@ -26,6 +27,7 @@ export const creatDepositTransaction = async (req: Request, res: Response) => {
       type: "DEPOSIT",
       date: new Date(),
       createdBy: _id,
+      cardNumber,
     });
     const dataNew = await newData.save();
 

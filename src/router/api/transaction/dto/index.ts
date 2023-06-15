@@ -7,5 +7,6 @@ export const createRateDto = z.object({
     amount: z.string(),
     category: z.string(),
     description: z.string(),
+    cardNumber: z.string().optional(),
   }),
 });

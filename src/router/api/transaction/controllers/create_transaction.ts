@@ -2,7 +2,8 @@ import { Request, Response } from "express";
 import TransactionSchema from "@/models/transaction";
 
 export const createTransaction = async (req: Request, res: Response) => {
-  const { accountId, type, amount, category, description } = req.body as any;
+  const { accountId, type, amount, category, description, cardNumber } =
+    req.body as any;
   const { _id } = req?.user || {};
 
   try {
@@ -13,6 +14,7 @@ export const createTransaction = async (req: Request, res: Response) => {
       category,
       description,
       type,
+      cardNumber,
       date: new Date(),
     });
     const dataNew = await newData.save();
