@@ -26,7 +26,7 @@ export const createCompany = async (req: Request, res: Response) => {
     const profileNew = await newProfile.save();
     const refNew = new UserProfileRef({
       userId: _id,
-      yarn: profileNew.id,
+      profileId: profileNew.id,
     });
     await refNew.save();
     return res.status(200).json({ status: "ok", data: profileNew.doc() });
