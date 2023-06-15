@@ -17,5 +17,11 @@ export const createRateDto = z.object({
     detailDueDate: z.string().optional(),
     detailType: z.string().optional(),
     invoiceNumber: z.string().optional(),
+    transactionsId: z.string().optional(),
+    toCompanyName: z.string().optional(),
+    toIban: z.string().optional(),
+    toSwiftCode: z.string().optional(),
+    detailAmount: z.string().optional(),
+    transferNumber: z.string().optional(),
   }),
 });

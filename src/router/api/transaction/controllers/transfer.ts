@@ -1,11 +1,14 @@
 import { Request, Response } from "express";
 import TransactionSchema from "@/models/transaction";
 import AccountSchema from "@/models/account";
-import InvoiceSchema from "@/models/invoice";
+import TransferSchema from "@/models/transfer";
 
 import { isNumber } from "lodash";
 
-export const createInvoiceTransaction = async (req: Request, res: Response) => {
+export const createTransferTransaction = async (
+  req: Request,
+  res: Response
+) => {
   const {
     accountId,
     amount,
@@ -14,13 +17,12 @@ export const createInvoiceTransaction = async (req: Request, res: Response) => {
     cardNumber,
     companyId,
     accountNumber,
-    recipientType,
-    recipientName,
-    recipientEmail,
-    recipientPhone,
-    detailDueDate,
+    toCompanyName,
+    toIban,
+    toSwiftCode,
     detailType,
-    invoiceNumber,
+    detailAmount,
+    transferNumber,
   } = req.body as any;
   const { _id } = req.user || {};
   try {
@@ -40,31 +42,29 @@ export const createInvoiceTransaction = async (req: Request, res: Response) => {
       amount: Number(amount),
       category,
       description,
-      type: "INVOICE",
+      type: "TRANSFER",
       date: new Date(),
       createdBy: _id,
       cardNumber,
     });
     const dataNew = await newData.save();
 
-    const newInvoice = new InvoiceSchema({
+    const newTransfer = new TransferSchema({
       accountNumber,
       companyId,
       createdBy: _id,
       detailAmount: Number(amount),
-      detailDueDate,
       detailType,
-      recipientEmail,
-      recipientName,
-      recipientPhone,
-      recipientType,
       transactionsId: dataNew._id,
-      invoiceNumber,
+      toCompanyName,
+      toIban,
+      toSwiftCode,
+      transferNumber,
     });
-    const newInvoiceData = await newInvoice.save();
+    const newTransferData = await newTransfer.save();
     return res.status(200).json({
       status: "ok",
-      data: { ...dataNew.doc(), invoice: newInvoiceData.doc() },
+      data: { ...dataNew.doc(), invoice: newTransferData.doc() },
     });
   } catch (error) {
     return res.status(400).json({ status: 400, error: JSON.stringify(error) });

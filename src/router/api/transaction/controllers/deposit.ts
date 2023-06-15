@@ -3,7 +3,7 @@ import TransactionSchema from "@/models/transaction";
 import AccountSchema from "@/models/account";
 import { isNumber } from "lodash";
 
-export const creatDepositTransaction = async (req: Request, res: Response) => {
+export const createDepositTransaction = async (req: Request, res: Response) => {
   const { accountId, amount, category, description, cardNumber } =
     req.body as any;
   const { _id } = req.user || {};
