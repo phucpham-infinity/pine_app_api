@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 
 export interface IInvoice extends IBaseModal {
   companyId: string;
-  createBy: string;
+  createdBy: string;
   accountNumber: string;
   transactionsId: string;
   recipientType: string;
@@ -14,11 +14,12 @@ export interface IInvoice extends IBaseModal {
   detailDueDate: string;
   detailType: string;
   detailAmount: string;
+  invoiceNumber: string;
 }
 
 const InvoiceSchema = createSchema({
   companyId: { type: mongoose.Types.ObjectId, ref: "Company", required: true },
-  createBy: { type: mongoose.Types.ObjectId, ref: "User", required: true },
+  createdBy: { type: mongoose.Types.ObjectId, ref: "User", required: true },
   accountNumber: { type: String, required: true },
   transactionsId: {
     type: mongoose.Types.ObjectId,
@@ -32,6 +33,7 @@ const InvoiceSchema = createSchema({
   detailDueDate: { type: String, required: true },
   detailType: { type: String, required: true },
   detailAmount: { type: String, required: true },
+  invoiceNumber: { type: String, required: true, unique: true },
 });
 
 InvoiceSchema.method("doc", function () {

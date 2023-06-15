@@ -16,5 +16,6 @@ export const createRateDto = z.object({
     recipientPhone: z.string().optional(),
     detailDueDate: z.string().optional(),
     detailType: z.string().optional(),
+    invoiceNumber: z.string().optional(),
   }),
 });

@@ -20,6 +20,7 @@ export const creatInvoiceTransaction = async (req: Request, res: Response) => {
     recipientPhone,
     detailDueDate,
     detailType,
+    invoiceNumber,
   } = req.body as any;
   const { _id } = req.user || {};
   try {
@@ -49,7 +50,7 @@ export const creatInvoiceTransaction = async (req: Request, res: Response) => {
     const newInvoice = new InvoiceSchema({
       accountNumber,
       companyId,
-      createBy: _id,
+      createdBy: _id,
       detailAmount: Number(amount),
       detailDueDate,
       detailType,
@@ -58,6 +59,7 @@ export const creatInvoiceTransaction = async (req: Request, res: Response) => {
       recipientPhone,
       recipientType,
       transactionsId: dataNew._id,
+      invoiceNumber,
     });
     const newInvoiceData = await newInvoice.save();
     return res.status(200).json({
