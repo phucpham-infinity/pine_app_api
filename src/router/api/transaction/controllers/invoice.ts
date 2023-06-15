@@ -44,6 +44,7 @@ export const createInvoiceTransaction = async (req: Request, res: Response) => {
       date: new Date(),
       createdBy: _id,
       cardNumber,
+      companyId,
     });
     const dataNew = await newData.save();
 

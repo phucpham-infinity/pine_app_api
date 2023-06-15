@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 
 export interface ITransactions extends IBaseModal {
   accountId: string;
+  companyId: string;
   createdBy: string;
   type: string;
   amount: number;
@@ -16,6 +17,7 @@ export interface ITransactions extends IBaseModal {
 const TransactionsSchema = createSchema({
   accountId: { type: mongoose.Types.ObjectId, ref: "Account", required: true },
   createdBy: { type: mongoose.Types.ObjectId, ref: "User", required: true },
+  companyId: { type: mongoose.Types.ObjectId, ref: "Company", required: true },
   amount: { type: Number, required: true },
   category: { type: String, required: true },
   description: { type: String, required: true },

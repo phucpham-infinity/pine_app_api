@@ -21,7 +21,6 @@ export const createTransferTransaction = async (
     toIban,
     toSwiftCode,
     detailType,
-    detailAmount,
     transferNumber,
   } = req.body as any;
   const { _id } = req.user || {};
@@ -46,6 +45,7 @@ export const createTransferTransaction = async (
       date: new Date(),
       createdBy: _id,
       cardNumber,
+      companyId,
     });
     const dataNew = await newData.save();
 
