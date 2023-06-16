@@ -34,8 +34,8 @@ export const createCompany = async (req: Request, res: Response) => {
     if (error.code === 11000) {
       return res.status(400).json({
         status: 400,
-        error: `This ${keys(error?.keyPattern)?.[0]} is unavailable`,
-        errorType: keys(error?.keyPattern)?.[0],
+        message: `This ${keys(error?.keyPattern)?.[0]} is unavailable`,
+        error: keys(error?.keyPattern)?.[0],
       });
     }
     return res.status(400).json({ status: 400, error });
