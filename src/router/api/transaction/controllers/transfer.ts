@@ -35,6 +35,7 @@ export const createTransferTransaction = async (
 
     account.balance = Number(account?.balance) - Number(amount);
     await account.save();
+    const now = new Date().toISOString();
 
     const newData = new TransactionSchema({
       accountId,
@@ -46,6 +47,8 @@ export const createTransferTransaction = async (
       createdBy: _id,
       cardNumber,
       companyId,
+      createdAt: now,
+      updatedAt: now,
     });
     const dataNew = await newData.save();
 
@@ -60,6 +63,8 @@ export const createTransferTransaction = async (
       toIban,
       toSwiftCode,
       transferNumber,
+      createdAt: now,
+      updatedAt: now,
     });
     const newTransferData = await newTransfer.save();
     return res.status(200).json({

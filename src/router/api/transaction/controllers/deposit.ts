@@ -20,8 +20,6 @@ export const createDepositTransaction = async (req: Request, res: Response) => {
     await account.save();
     const now = new Date().toISOString();
 
-    console.log("now=>>>>>>>", now);
-
     const newData = new TransactionSchema({
       accountId,
       amount: Number(amount),

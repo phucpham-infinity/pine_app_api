@@ -35,6 +35,8 @@ export const createInvoiceTransaction = async (req: Request, res: Response) => {
     account.balance = Number(account?.balance) - Number(amount);
     await account.save();
 
+    const now = new Date().toISOString();
+
     const newData = new TransactionSchema({
       accountId,
       amount: Number(amount),
@@ -45,6 +47,8 @@ export const createInvoiceTransaction = async (req: Request, res: Response) => {
       createdBy: _id,
       cardNumber,
       companyId,
+      createdAt: now,
+      updatedAt: now,
     });
     const dataNew = await newData.save();
 
@@ -61,6 +65,8 @@ export const createInvoiceTransaction = async (req: Request, res: Response) => {
       recipientType,
       transactionsId: dataNew._id,
       invoiceNumber,
+      createdAt: now,
+      updatedAt: now,
     });
     const newInvoiceData = await newInvoice.save();
     return res.status(200).json({
