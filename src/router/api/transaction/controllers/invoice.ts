@@ -32,7 +32,7 @@ export const createInvoiceTransaction = async (req: Request, res: Response) => {
     if (!isNumber(+amount))
       return res.status(400).json({ status: 400, error: "Amount invalid!" });
 
-    account.balance = Number(account?.balance) - Number(amount);
+    account.balance = Number(account?.balance) + Number(amount);
     await account.save();
 
     const now = new Date().toISOString();
