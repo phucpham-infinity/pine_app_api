@@ -60,10 +60,7 @@ export const getTransactionsByAccount = async (req: Request, res: Response) => {
       {
         $match: where,
       },
-      {
-        $sort: { createdAt: -1 },
-      },
-    ]);
+    ]).sort({ createdAt: -1 });
     return res.status(200).json({ status: "ok", data: transactions });
   } catch (error) {
     return res.status(400).json({ status: 400, error });
