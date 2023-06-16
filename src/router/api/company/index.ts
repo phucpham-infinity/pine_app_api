@@ -6,12 +6,14 @@ import { createCompany } from "./controllers/create_company";
 import { joinCompany } from "./controllers/join_company";
 import { updateCompany } from "./controllers/update_company";
 import { getCompanyByName } from "./controllers/get_company_by_name";
+import { checkCompany } from "./controllers/check_company";
 
 const ROUTER = {
   create: "/company",
   update: "/company/:id",
-  getByName: "/company/:name",
+  getByName: "/company/by/:name",
   join: "/company/join",
+  check: "/company/check",
 };
 
 export const CompanyRouter = express.Router();
@@ -25,6 +27,8 @@ CompanyRouter.route(ROUTER.create).post([
 CompanyRouter.route(ROUTER.getByName).get([verifyToken, getCompanyByName]);
 
 CompanyRouter.route(ROUTER.join).post([verifyToken, joinCompany]);
+CompanyRouter.route(ROUTER.check).get([verifyToken, checkCompany]);
+
 CompanyRouter.route(ROUTER.update).put([
   verifyToken,
   validate(updateCompanyDto),
