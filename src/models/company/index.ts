@@ -11,6 +11,7 @@ export interface ICompany extends IBaseModal {
   licenseNumber?: string;
   backupEmail?: string;
   coverUrl?: string;
+  status: "PROCESSING" | "VERIFIED" | "DELIVERY" | "DONE";
 }
 
 const CompanySchema = createSchema({
@@ -22,6 +23,7 @@ const CompanySchema = createSchema({
   licenseNumber: { type: String, required: false, default: "" },
   backupEmail: { type: String, required: false, default: "" },
   coverUrl: { type: String, required: false },
+  status: { type: String, required: false, default: "PROCESSING" },
 });
 
 CompanySchema.method("doc", function () {
