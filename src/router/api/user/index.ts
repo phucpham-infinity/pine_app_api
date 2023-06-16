@@ -1,4 +1,4 @@
-import express, { Router } from "express";
+import express from "express";
 
 import { validate, verifyToken } from "@/middleware";
 import { registerDto, loginDto, updateByPhoneDto } from "./dto";
@@ -12,9 +12,11 @@ import { findAll } from "./controllers/findAll";
 import { findById } from "./controllers/findById";
 import { changePin } from "./controllers/changePin";
 import { changePhone } from "./controllers/changePhone";
+import { checkPin } from "./controllers/check";
 
 const ROUTER = {
   register: "/user/register",
+  check: "/user/check",
   loginWithPhone: "/user/login-with-phone",
   me: "/user/me",
   all: "/user",
@@ -28,6 +30,7 @@ const ROUTER = {
 export const UserRouter = express.Router();
 
 UserRouter.route(ROUTER.register).post([validate(registerDto), register]);
+UserRouter.route(ROUTER.check).post([validate(registerDto), checkPin]);
 
 UserRouter.route(ROUTER.loginWithPhone).post([
   validate(loginDto),
