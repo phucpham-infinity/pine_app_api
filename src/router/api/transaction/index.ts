@@ -5,11 +5,16 @@ import { createTransaction } from "./controllers/create_transaction";
 import { createDepositTransaction } from "./controllers/deposit";
 import { createInvoiceTransaction } from "./controllers/invoice";
 import { createTransferTransaction } from "./controllers/transfer";
+import { getTransactionsByAccount } from "./controllers/transactions_by_account";
+import { getTransactionsByCompany } from "./controllers/transactions_by_company";
+
 import { createRateDto } from "./dto";
 
 const ROUTER = {
   create: "/transaction",
   update: "/transaction",
+  getByAccount: "/transaction/account/:accountId",
+  getByCompany: "/transaction/company/:companyId",
   deposit: "/transaction/deposit",
   invoice: "/transaction/invoice",
   transfer: "/transaction/transfer",
@@ -39,4 +44,14 @@ TransactionRouter.route(ROUTER.transfer).post([
   verifyToken,
   validate(createRateDto),
   createTransferTransaction,
+]);
+
+TransactionRouter.route(ROUTER.getByAccount).get([
+  verifyToken,
+  getTransactionsByAccount,
+]);
+
+TransactionRouter.route(ROUTER.getByCompany).get([
+  verifyToken,
+  getTransactionsByCompany,
 ]);
