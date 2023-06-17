@@ -10,6 +10,7 @@ export const createForMe = async (req: Request, res: Response) => {
     receiveNotificationsForExceedingSetLimits,
     receiveNotificationsForOutstandingInvoices,
     receiveNotificationsForPaymentsAndTransfers,
+    mainAccountId,
   } = req.body as any;
   const { _id } = req.user || {};
   try {
@@ -22,6 +23,7 @@ export const createForMe = async (req: Request, res: Response) => {
       receiveNotificationsForExceedingSetLimits,
       receiveNotificationsForOutstandingInvoices,
       receiveNotificationsForPaymentsAndTransfers,
+      mainAccountId,
     });
     const dataNew = await newData.save();
     return res.status(200).json({ status: "ok", data: dataNew.doc() });

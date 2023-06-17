@@ -11,6 +11,7 @@ export interface ISetting extends IBaseModal {
   receiveNotificationsForOutstandingInvoices: boolean;
   receiveNotificationsForExceedingSetLimits: boolean;
   notificationMethods: "PUSH_NOTIFICATION" | "TEXT_MESSAGE" | "EMAIL";
+  mainAccountId: string;
 }
 
 const SettingSchema = createSchema({
@@ -19,6 +20,11 @@ const SettingSchema = createSchema({
     ref: "User",
     required: true,
     unique: true,
+  },
+  mainAccountId: {
+    type: mongoose.Types.ObjectId,
+    ref: "Account",
+    required: false,
   },
   enableBiometric: { type: Boolean, required: true, default: false },
   confirmationMethods: { type: String, required: true, default: "FACE_ID" },

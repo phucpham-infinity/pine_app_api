@@ -9,6 +9,7 @@ export const createSettingDto = z.object({
     receiveNotificationsForOutstandingInvoices: z.boolean().optional(),
     receiveNotificationsForExceedingSetLimits: z.boolean().optional(),
     notificationMethods: z.string().optional(),
+    mainAccountId: z.string().optional(),
   }),
 });
 
@@ -21,5 +22,6 @@ export const updateSettingDto = z.object({
     receiveNotificationsForOutstandingInvoices: z.boolean().optional(),
     receiveNotificationsForExceedingSetLimits: z.boolean().optional(),
     notificationMethods: z.string().optional(),
+    mainAccountId: z.string().optional(),
   }),
 });

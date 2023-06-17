@@ -13,6 +13,7 @@ export const updateSetting = async (req: Request, res: Response) => {
     receiveNotificationsForExceedingSetLimits,
     receiveNotificationsForOutstandingInvoices,
     receiveNotificationsForPaymentsAndTransfers,
+    mainAccountId,
   } = req.body as any;
 
   const { _id } = req.user || {};
@@ -31,6 +32,7 @@ export const updateSetting = async (req: Request, res: Response) => {
           receiveNotificationsForExceedingSetLimits,
           receiveNotificationsForOutstandingInvoices,
           receiveNotificationsForPaymentsAndTransfers,
+          mainAccountId,
         },
       },
       { new: true }
