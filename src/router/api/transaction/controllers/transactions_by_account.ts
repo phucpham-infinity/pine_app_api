@@ -9,7 +9,9 @@ const ObjectId = mongoose.Types.ObjectId;
 export const getTransactionsByAccount = async (req: Request, res: Response) => {
   const { _id } = req?.user || {};
   const { accountId: _accountId } = req.params || {};
-  const { invoiceType, transferType, type, fromDate, toDate } = req.query || {};
+  const { invoiceTypes, transferTypes, types, fromDate, toDate } =
+    req.query || {};
+
   const id = new ObjectId(_id);
   const accountId = new ObjectId(_accountId);
 
@@ -23,9 +25,20 @@ export const getTransactionsByAccount = async (req: Request, res: Response) => {
     {
       accountId: accountId,
       createdBy: id,
-      "invoice.detailType": invoiceType,
-      "transfer.detailType": transferType,
-      type,
+      "invoice.detailType": invoiceTypes &&
+        invoiceTypes != "null" &&
+        invoiceTypes != "[]" && {
+          $in: JSON.parse(invoiceTypes as string),
+        },
+      "transfer.detailType": transferTypes &&
+        transferTypes != "null" &&
+        transferTypes != "[]" && {
+          $in: JSON.parse(transferTypes as string),
+        },
+      type: types &&
+        types != "[]" && {
+          $in: JSON.parse(types as string),
+        },
       createdAt: !!fromDate &&
         !!toDate && {
           $gte: new Date(fromDate as string),
@@ -35,7 +48,7 @@ export const getTransactionsByAccount = async (req: Request, res: Response) => {
     identity
   );
 
-  console.log("ưherw", where);
+  console.log("where", where);
 
   try {
     const transactions = await TransactionSchema.aggregate([
