@@ -27,7 +27,11 @@ const SettingSchema = createSchema({
     required: false,
   },
   enableBiometric: { type: Boolean, required: true, default: false },
-  confirmationMethods: { type: String, required: true, default: "FACE_ID" },
+  confirmationMethods: {
+    type: String,
+    required: true,
+    default: "BIOMETRIC_ID",
+  },
   receiveNotificationsForPaymentsAndTransfers: {
     type: Boolean,
     required: true,
