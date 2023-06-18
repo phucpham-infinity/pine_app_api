@@ -36,6 +36,7 @@ export const getTransactionsByAccount = async (req: Request, res: Response) => {
           $in: JSON.parse(transferTypes as string),
         },
       type: types &&
+        types != "null" &&
         types != "[]" && {
           $in: JSON.parse(types as string),
         },
