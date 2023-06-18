@@ -7,6 +7,7 @@ import { createInvoiceTransaction } from "./controllers/invoice";
 import { createTransferTransaction } from "./controllers/transfer";
 import { getTransactionsByAccount } from "./controllers/transactions_by_account";
 import { getTransactionsByCompany } from "./controllers/transactions_by_company";
+import { createInvoicePdf } from "./controllers/invoice_pdf";
 
 import { createRateDto } from "./dto";
 
@@ -18,6 +19,7 @@ const ROUTER = {
   deposit: "/transaction/deposit",
   invoice: "/transaction/invoice",
   transfer: "/transaction/transfer",
+  invoicePdf: "/transaction/invoice-pdf/:invoiceNumber",
 };
 
 export const TransactionRouter = express.Router();
@@ -55,3 +57,5 @@ TransactionRouter.route(ROUTER.getByCompany).get([
   verifyToken,
   getTransactionsByCompany,
 ]);
+
+TransactionRouter.route(ROUTER.invoicePdf).get([createInvoicePdf]);
