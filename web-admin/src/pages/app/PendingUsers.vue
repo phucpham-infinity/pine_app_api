@@ -1,6 +1,6 @@
 <template >
     <div>
-        <q-table :filter="filter" :loading="store.isLoading" :rows-per-page-options="[100]" title="Pending Users"
+        <q-table :filter="filter" :loading="store.isLoading" :rows-per-page-options="[500]" title="Pending Users"
             :rows="store.data" :columns="columns" row-key="name">
             <template v-slot:top-right>
                 <q-input borderless dense debounce="300" v-model="filter" placeholder="Search">
@@ -35,8 +35,9 @@
                         </q-badge>
                     </q-td>
                     <q-td key="actions" :props="props">
-                        <q-btn @click="handleApproval(props.row.userEmail)" v-if="props.row.status === 'PENDING'"
-                            color="primary" label="APPROVAL" />
+                        <q-btn
+                            @click="handleApproval({ email: props.row.userEmail, companyName: props.row.companyName, userId: props.row.userId })"
+                            v-if="props.row.status === 'PENDING'" color="primary" label="APPROVAL" />
                     </q-td>
                 </q-tr>
             </template>
@@ -47,18 +48,13 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { useUserRequestStore } from '../../stores/user-request';
-import { useQuasar } from 'quasar'
 
 const store = useUserRequestStore();
-const $q = useQuasar()
 
 
-const handleApproval = (email: string) => {
-    store.approvalRequest(email).then(() => {
+const handleApproval = ({ email, userId, companyName }: { email: string, companyName: string, userId: string }) => {
+    store.approvalRequest({ email, userId, companyName }).then(() => {
         filter.value = '';
-        $q.notify({
-            message: "Approval user done!", type: 'positive', position: 'top-right',
-        })
     })
 }
 

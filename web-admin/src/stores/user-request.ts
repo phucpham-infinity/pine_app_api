@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { useService } from "../lib/axios";
+import { Notify } from "quasar";
 
 export const useUserRequestStore = defineStore("userRequest", {
   state: () => ({
@@ -20,14 +21,37 @@ export const useUserRequestStore = defineStore("userRequest", {
         });
       if (res?.data) this._data = res?.data;
     },
-    async approvalRequest(email: string) {
+    async approvalRequest({
+      email,
+      userId,
+      companyName,
+    }: {
+      email: string;
+      userId: string;
+      companyName: string;
+    }) {
       this._isLoading = true;
-      await useService()
-        .put(`/request-company/approval?email=${email}`)
-        .catch(() => {
+      return useService()
+        .put(
+          `/request-company/approval?email=${email}&userId=${userId}&companyName=${companyName}`
+        )
+        .then(() => {
+          Notify.create({
+            message: "Approval user done!",
+            type: "positive",
+            position: "top-right",
+          });
+          this.getUserRequest();
+          this._isLoading = false;
+        })
+        .catch((err) => {
+          Notify.create({
+            message: err?.response?.data?.error,
+            type: "negative",
+            position: "top-right",
+          });
           this._isLoading = false;
         });
-      this.getUserRequest();
     },
   },
 });
