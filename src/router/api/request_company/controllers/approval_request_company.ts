@@ -1,10 +1,29 @@
 import { Request, Response } from "express";
 import RequestCompanySchema from "@/models/request_company";
+import CompanySchema from "@/models/company";
+import UserSchema from "@/models/user";
+
+import UserCompanyRefSchema from "@/models/user_company_ref";
 
 export const approvalRequestCompany = async (req: Request, res: Response) => {
-  const { email } = req.query || {};
+  const { companyName, userId, email } = req.query || {};
 
   try {
+    const company = await CompanySchema.findOne({ companyName });
+    if (!company) {
+      return res.status(400).json({ status: 400, error: "Company not found!" });
+    }
+
+    const user = await UserSchema.findById(userId);
+    if (!user) {
+      return res.status(400).json({ status: 400, error: "User not found!" });
+    }
+    const newUserCompanyRef = new UserCompanyRefSchema({
+      userId: user._id,
+      companyId: company._id,
+    });
+    await newUserCompanyRef.save();
+
     const data = await RequestCompanySchema.findOneAndUpdate(
       { userEmail: email },
       {
