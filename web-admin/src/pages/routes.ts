@@ -3,7 +3,7 @@ import { createRouter } from "vue-router";
 import LoginPage from "./auth/Login.vue";
 import AppLayout from "./app/App.vue";
 import HomePage from "./app/Home.vue";
-import UserRequestPage from "./app/UserRequest.vue";
+import PendingUsersPage from "./app/PendingUsers.vue";
 
 import { useAuthStore } from "../stores/auth";
 
@@ -23,8 +23,9 @@ export default function (history: any) {
             },
           },
           {
-            path: "/user-request",
-            component: UserRequestPage,
+            path: "/pending-users",
+            name: "pending-users",
+            component: PendingUsersPage,
             meta: {
               isPublic: false,
             },

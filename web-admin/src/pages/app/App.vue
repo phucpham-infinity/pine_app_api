@@ -18,7 +18,8 @@ onMounted(() => {
 const handleToMenu = (menu: number) => {
     switch (menu) {
         case 1:
-            router.push({ path: '/user-request' })
+
+            router.push({ name: "pending-users" })
             break;
 
         default:
@@ -47,11 +48,10 @@ const handleToMenu = (menu: number) => {
                 <q-list padding>
                     <q-item clickable v-ripple>
                         <q-item-section avatar>
-                            <q-icon name="inbox" />
+                            <q-icon name="autorenew" />
                         </q-item-section>
-
                         <q-item-section @click="handleToMenu(1)">
-                            User Request
+                            Pending Users
                         </q-item-section>
                     </q-item>
                 </q-list>

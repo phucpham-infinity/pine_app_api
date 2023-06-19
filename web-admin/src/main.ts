@@ -1,7 +1,8 @@
+//@ts-nocheck
 import { createApp } from "vue";
 import App from "./App.vue";
 
-import { Quasar } from "quasar";
+import { Quasar, Notify } from "quasar";
 import "@quasar/extras/roboto-font/roboto-font.css";
 import "@quasar/extras/material-icons/material-icons.css";
 import "@quasar/extras/material-icons-outlined/material-icons-outlined.css";
@@ -18,7 +19,7 @@ import router from "./lib/router";
 createApp(App)
   .use(store)
   .use(Quasar, {
-    plugins: {}, // import Quasar plugins and add here
+    plugins: { Notify }, // import Quasar plugins and add here
   })
   .use(router)
   .mount("#app");

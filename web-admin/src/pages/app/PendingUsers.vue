@@ -1,6 +1,14 @@
 <template >
     <div>
-        <q-table :loading="store.isLoading" title="User Request" :rows="store.data" :columns="columns" row-key="name">
+        <q-table :filter="filter" :loading="store.isLoading" :rows-per-page-options="[100]" title="Pending Users"
+            :rows="store.data" :columns="columns" row-key="name">
+            <template v-slot:top-right>
+                <q-input borderless dense debounce="300" v-model="filter" placeholder="Search">
+                    <template v-slot:append>
+                        <q-icon name="search"></q-icon>
+                    </template>
+                </q-input>
+            </template>
             <template v-slot:body="props">
                 <q-tr :props="props">
                     <q-td key="userEmail" :props="props">
@@ -37,17 +45,29 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useUserRequestStore } from '../../stores/user-request';
+import { useQuasar } from 'quasar'
 
 const store = useUserRequestStore();
+const $q = useQuasar()
+
 
 const handleApproval = (email: string) => {
-    store.approvalRequest(email)
+    store.approvalRequest(email).then(() => {
+        filter.value = '';
+        $q.notify({
+            message: "Approval user done!", type: 'positive', position: 'top-right',
+        })
+    })
 }
 
+const filter = ref('');
+
 onMounted(() => {
-    store.getUserRequest()
+    store.getUserRequest().then(() => {
+        filter.value = ''
+    })
 })
 
 const columns = [
