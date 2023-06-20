@@ -11,6 +11,7 @@ export const createCompany = async (req: Request, res: Response) => {
     lastName,
     nationality,
     passportNumber,
+    type,
   } = req.body as any;
   const { _id } = req?.user || {};
   try {
@@ -22,6 +23,7 @@ export const createCompany = async (req: Request, res: Response) => {
       lastName,
       nationality,
       passportNumber,
+      type,
     });
     const profileNew = await newProfile.save();
     const refNew = new UserProfileRef({

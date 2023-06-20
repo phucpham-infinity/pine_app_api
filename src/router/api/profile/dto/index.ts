@@ -9,6 +9,7 @@ export const createProfileDto = z.object({
     passportNumber: z.string().optional(),
     issueDate: z.string().optional(),
     expiryDate: z.string().optional(),
+    type: z.string().optional(),
   }),
 });
 
@@ -21,5 +22,6 @@ export const updateProfileDto = z.object({
     passportNumber: z.string().optional(),
     issueDate: z.string().optional(),
     expiryDate: z.string().optional(),
+    type: z.string().optional(),
   }),
 });

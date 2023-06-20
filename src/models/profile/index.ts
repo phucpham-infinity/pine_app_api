@@ -10,9 +10,11 @@ export interface IProfile extends IBaseModal {
   passportNumber?: string;
   issueDate?: string;
   expiryDate?: string;
+  type: "COMPANY" | "PERSONAL";
 }
 
 const ProfileSchema = createSchema({
+  type: { type: String, required: false, default: "PERSONAL" },
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   nationality: { type: String, required: true },
