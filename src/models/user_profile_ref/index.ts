@@ -8,7 +8,12 @@ export interface IUserProfileRef extends IBaseModal {
 }
 
 const UserProfileRefSchema = createSchema({
-  userId: { type: mongoose.Types.ObjectId, ref: "User", required: true },
+  userId: {
+    type: mongoose.Types.ObjectId,
+    ref: "User",
+    required: true,
+    unique: true,
+  },
   profileId: { type: mongoose.Types.ObjectId, ref: "Profile", unique: true },
 });
 
