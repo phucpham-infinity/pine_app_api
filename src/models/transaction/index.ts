@@ -17,7 +17,7 @@ export interface ITransactions extends IBaseModal {
 const TransactionsSchema = createSchema({
   accountId: { type: mongoose.Types.ObjectId, ref: "Account", required: true },
   createdBy: { type: mongoose.Types.ObjectId, ref: "User", required: true },
-  companyId: { type: mongoose.Types.ObjectId, ref: "Company", required: true },
+  c: { type: mongoose.Types.ObjectId, ref: "Company", required: false },
   amount: { type: Number, required: true },
   category: { type: String, required: true },
   description: { type: String, required: true },
