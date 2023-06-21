@@ -19,7 +19,7 @@ export interface IInvoice extends IBaseModal {
 
 const InvoiceSchema = createSchema({
   companyId: { type: mongoose.Types.ObjectId, ref: "Company", required: true },
-  createdBy: { type: mongoose.Types.ObjectId, ref: "User", required: true },
+  createdBy: { type: mongoose.Types.ObjectId, ref: "User", required: false },
   accountNumber: { type: String, required: true },
   transactionsId: {
     type: mongoose.Types.ObjectId,

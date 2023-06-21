@@ -16,7 +16,7 @@ export interface ITransfer extends IBaseModal {
 }
 
 const TransferSchema = createSchema({
-  companyId: { type: mongoose.Types.ObjectId, ref: "Company", required: true },
+  companyId: { type: mongoose.Types.ObjectId, ref: "Company", required: false },
   createdBy: { type: mongoose.Types.ObjectId, ref: "User", required: true },
   accountNumber: { type: String, required: true },
   transactionsId: {
