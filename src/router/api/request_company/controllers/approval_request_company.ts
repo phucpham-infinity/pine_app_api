@@ -7,11 +7,14 @@ import UserCompanyRefSchema from "@/models/user_company_ref";
 
 export const approvalRequestCompany = async (req: Request, res: Response) => {
   const { companyName, userId, email } = req.query || {};
-
+  let company: any;
   try {
-    const company = await CompanySchema.findOne({ companyName });
-    if (!company) {
-      return res.status(400).json({ status: 400, error: "Company not found!" });
+    const company1 = await CompanySchema.findOne({ companyName });
+    if (!company1) {
+      const company2 = await CompanySchema.findOne({ companyName: "pineapp" });
+      company = company2;
+    } else {
+      company = company1;
     }
 
     const user = await UserSchema.findById(userId);

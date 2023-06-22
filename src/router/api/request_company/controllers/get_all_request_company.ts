@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import RequestCompanySchema from "@/models/request_company";
-import { pick, isUndefined, chain } from "lodash";
+import { pick } from "lodash";
 
 export const getAllRequestCompany = async (req: Request, res: Response) => {
   const query = pick(req.query, ["status"]);
