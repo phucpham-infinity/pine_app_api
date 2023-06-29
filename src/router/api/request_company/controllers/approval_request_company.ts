@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import RequestCompanySchema from "@/models/request_company";
 import CompanySchema from "@/models/company";
 import UserSchema from "@/models/user";
-
 import UserCompanyRefSchema from "@/models/user_company_ref";
 
 export const approvalRequestCompany = async (req: Request, res: Response) => {
